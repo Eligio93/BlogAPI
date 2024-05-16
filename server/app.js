@@ -4,13 +4,28 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors= require('cors')
-
+const mongoose = require ('mongoose')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const blogRouter = require ('./routes/blog')
+const blogRouter = require ('./routes/blog');
+require('dotenv').config();
+
+///-----CONNECTION TO DB-----///
+
+mongoose.set("strictQuery", false);
+const mongoDB = process.env.MONGODB_URI || process.env.DB_STRING_DEV;
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+  console.log('Connected to Database')
+}
+///---------------------------///
+
+
 
 var app = express();
 app.use(cors())
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
