@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from 'axios'
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function Signup() {
+    //hook to redirect the user after signup
+    const navigate = useNavigate()
     const [data, setData] = useState({
         name: '',
         lastName: '',
@@ -14,8 +16,9 @@ export default function Signup() {
         admin: true
     })
     const [fetchingError, setFetchingError] = useState()
+    const [serverResponse, setServerResponse] = useState();
 
-
+    //handle input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData((prevData) => ({
@@ -25,17 +28,23 @@ export default function Signup() {
     async function handleSubmit(e) {
         e.preventDefault(e);
         try {
+            //fetch data to server and get the response in json
             const response = await axios.post('http://localhost:3000/blog/signup', data)
             if (response.status === 200) {
-                window.location.href='/'
+                setServerResponse(response.data.message)
+                //show the successful creating for 2 seconds than redirect to home
+                setTimeout(() => {
+                    navigate('/')
+                }, 2000)
             }
         } catch (err) {
-            setFetchingError(err.message)
+            console.log(err)
         }
     }
     return (
         <>
             {fetchingError && <p>{fetchingError}</p>}
+            {serverResponse && <p>{serverResponse}</p>}
             <form>
                 <label htmlFor="name">Name:
                     <input type="text" name="name" id="name" value={data.name} onChange={handleChange} />
