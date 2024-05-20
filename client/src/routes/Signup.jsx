@@ -38,12 +38,12 @@ export default function Signup() {
                 }, 2000)
             }
         } catch (err) {
-            console.log(err)
+          setFetchingError(err.message)
         }
     }
     return (
         <>
-            {fetchingError && <p>{fetchingError}</p>}
+            {fetchingError && <p>{fetchingError}</p> }
             {serverResponse && <p>{serverResponse}</p>}
             <form>
                 <label htmlFor="name">Name:
