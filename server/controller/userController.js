@@ -21,6 +21,12 @@ exports.signup_post = [
     body('email', 'Insert a valid email with the following format info@info.com')
         .trim()
         .isEmail()
+        .custom(async value => {
+            const user = await User.findOne({ email: value })
+            if (user) {
+                throw new Error('Email already in use')
+            }
+        })
         .escape(),
     body('password', 'Password must be at least 4 characters')
         .trim()
@@ -50,19 +56,25 @@ exports.signup_post = [
 
 ]
 
-/*get login*/
-exports.login_get = (req, res, next) => {
-    res.json({ message: 'Welcome to login' })
-}
+
 /*post login*/
-exports.login_post = [
-    passport.authenticate('local', { session: false, failureRedirect: '/blog/login', failureMessage: true }),
-    (req, res, next) => {
-        jwt.sign({ id: req.user._id }, 'secret', (err, token) => {
-            if (err) {
-                next(err)
-            }
-            res.json({ token })
-        })
-    }
-]
+exports.login_post = (req, res, next) => {
+    passport.authenticate('local', { session: false }, (err, user, info) => {
+        if (err) {
+            return res.status(500).json({ message: 'Internal server Error' })
+        }
+        if (!user) {
+            return res.status(400).json({ message: info.message })
+        }
+        if (user) {
+            jwt.sign({ id: user._id }, 'secret', (err, token) => {
+                if (err) {
+                    next(err)
+                }
+                res.json({ token })
+            })
+        }
+    })(req,res,next)
+}
+
+
