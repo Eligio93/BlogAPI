@@ -1,18 +1,18 @@
 import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
+import { AuthContext } from "../../components/AuthContext"
 
 
 
 export default function Login() {
-    const [jwt, setJwt] = useState(null)
+    const { jwt, setJwt, user, setUser } = useContext(AuthContext)
     const [data, setData] = useState({
         email: '',
         password: ''
     }
     )
     const [error, setError] = useState()
-    const [user,setUser]= useState(null)
 
     //handle logIn when  login button clicked
     const handleLogIn = async (e) => {
@@ -20,16 +20,14 @@ export default function Login() {
         try {
             //fetch data to server and get the response in json
             const response = await axios.post('http://localhost:3000/blog/login', data)
-            console.log(response)
             let token = response.data.token
             localStorage.setItem('token', token)
             setJwt(token)
-            console.log(response.data.user)
             setUser(response.data.user)
             setError()
 
         } catch (err) {
-           setError(err.response.data.message)
+            setError(err.response.data.message)
         }
     }
 
@@ -44,7 +42,7 @@ export default function Login() {
     return (
         <>  {/*in case there are errors*/}
             {error && <p>{error}</p>}
-            {user ? (<p>You are already logged</p>) : (
+            {user ? (<p>You are already logged as {user.name}. Not you? <Link to='/logout'>LogOut</Link></p>) : (
                 <form>
                     <label htmlFor="email">Email:
                         <input type="email" name="email" id="email" value={data.email} onChange={handleChange} />
