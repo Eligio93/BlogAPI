@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../components/AuthContext";
+
 
 
 
 export default function Signup() {
+    const { user, setUSer } = useContext(AuthContext)
     //hook to redirect the user after signup
     const navigate = useNavigate()
     const [data, setData] = useState({
@@ -38,28 +41,37 @@ export default function Signup() {
                 }, 2000)
             }
         } catch (err) {
-          setFetchingError(err.message)
+            console.log(err)
+            setFetchingError(err.message)
         }
     }
     return (
         <>
-            {fetchingError && <p>{fetchingError}</p> }
+            {fetchingError && <p>{fetchingError}</p>}
             {serverResponse && <p>{serverResponse}</p>}
-            <form>
-                <label htmlFor="name">Name:
-                    <input type="text" name="name" id="name" value={data.name} onChange={handleChange} />
-                </label>
-                <label htmlFor="lastName">LastName:
-                    <input type="text" name="lastName" id="lastName" value={data.lastName} onChange={handleChange} />
-                </label>
-                <label htmlFor="email">Email:
-                    <input type="email" name="email" id="email" value={data.email} onChange={handleChange} />
-                </label>
-                <label htmlFor="password">Password:
-                    <input type="password" name="password" id="password" value={data.password} onChange={handleChange} autoComplete="on" />
-                </label>
-                <button onClick={handleSubmit}>Invia</button>
-            </form>
+            {user ? (
+                <>
+                    <p>To register a new account you need to logOut first</p>
+                    <Link to='/logout'>Logout</Link>
+
+                </>
+            ) : (
+                <form>
+                    <label htmlFor="name">Name:
+                        <input type="text" name="name" id="name" value={data.name} onChange={handleChange} />
+                    </label>
+                    <label htmlFor="lastName">LastName:
+                        <input type="text" name="lastName" id="lastName" value={data.lastName} onChange={handleChange} />
+                    </label>
+                    <label htmlFor="email">Email:
+                        <input type="email" name="email" id="email" value={data.email} onChange={handleChange} />
+                    </label>
+                    <label htmlFor="password">Password:
+                        <input type="password" name="password" id="password" value={data.password} onChange={handleChange} autoComplete="on" />
+                    </label>
+                    <button onClick={handleSubmit}>Invia</button>
+                </form>)}
+
         </>
     )
 }
