@@ -3,6 +3,34 @@ const asyncHandler = require('express-async-handler')
 const passport = require('../passport-config')
 const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken')
+/*LOGIN GET*/
+exports.user_get = (req, res) => {      
+    res.json({user:req.user})
+}
+
+
+
+
+/*LOGIN POST*/
+exports.login_post = (req, res, next) => {
+    passport.authenticate('local', { session: false }, (err, user, info) => {
+        if (err) {
+            return res.status(500).json({ message: 'Internal server Error' })
+        }
+        if (!user) {
+            return res.status(400).json({ message: info.message })
+        }
+        if (user) {
+            jwt.sign({ id: user._id }, 'secret', (err, token) => {
+                if (err) {
+                    next(err)
+                }
+                console.log(user)
+                res.json({ token, user })
+            })
+        }
+    })(req, res, next)
+}
 
 
 
@@ -56,25 +84,5 @@ exports.signup_post = [
 
 ]
 
-
-/*post login*/
-exports.login_post = (req, res, next) => {
-    passport.authenticate('local', { session: false }, (err, user, info) => {
-        if (err) {
-            return res.status(500).json({ message: 'Internal server Error' })
-        }
-        if (!user) {
-            return res.status(400).json({ message: info.message })
-        }
-        if (user) {
-            jwt.sign({ id: user._id }, 'secret', (err, token) => {
-                if (err) {
-                    next(err)
-                }
-                res.json({ token })
-            })
-        }
-    })(req,res,next)
-}
 
 
