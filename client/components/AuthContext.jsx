@@ -2,6 +2,7 @@ import React, {createContext,useState} from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 
+
 export const AuthContext=createContext();
 
 export const AuthProvider= ({children}) => {
@@ -44,11 +45,17 @@ export const AuthProvider= ({children}) => {
         }
         getUser()  
     }, [jwt])
+    
+    function logOut(){
+        localStorage.removeItem('token')
+        setUser(null)
+        setJwt(null)
+    }
 
 
 
     return (
-        <AuthContext.Provider value={{user,setUser,jwt,setJwt}}>
+        <AuthContext.Provider value={{user,setUser,jwt,setJwt,logOut}}>
         {children}
         </AuthContext.Provider>
     )
