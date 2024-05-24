@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react"
 import axios from "axios"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../components/AuthContext"
 
 
 
 export default function Login() {
+    const navigate = useNavigate();
     const { jwt, setJwt, user, setUser } = useContext(AuthContext)
     const [data, setData] = useState({
         email: '',
@@ -19,12 +20,13 @@ export default function Login() {
         e.preventDefault(e);
         try {
             //fetch data to server and get the response in json
-            const response = await axios.post('http://localhost:3000/blog/login', data)
+            const response = await axios.post('http://localhost:3000/user/login', data)
             let token = response.data.token
             localStorage.setItem('token', token)
             setJwt(token)
             setUser(response.data.user)
             setError()
+            navigate('/')
 
         } catch (err) {
             setError(err.response.data.message)
@@ -53,7 +55,6 @@ export default function Login() {
                     <button onClick={handleLogIn}>LogIn</button>
                 </form>
             )}
-            <Link to='/'>Home</Link>
         </>
 
     )

@@ -32,7 +32,7 @@ export default function Signup() {
         e.preventDefault(e);
         try {
             //fetch data to server and get the response in json
-            const response = await axios.post('http://localhost:3000/blog/signup', data)
+            const response = await axios.post('http://localhost:3000/user/signup', data)
             if (response.status === 200) {
                 setServerResponse(response.data.message)
                 //show the successful creating for 2 seconds than redirect to home

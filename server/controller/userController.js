@@ -3,12 +3,13 @@ const asyncHandler = require('express-async-handler')
 const passport = require('../passport-config')
 const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken')
-/*LOGIN GET*/
-exports.user_get = (req, res) => {      
-    res.json({user:req.user})
+
+
+
+/*GET USER*/
+exports.user_get = (req, res) => {
+    res.json({ user: req.user })
 }
-
-
 
 
 /*LOGIN POST*/
@@ -33,7 +34,7 @@ exports.login_post = (req, res, next) => {
 }
 
 
-
+/*SIGNUP POST*/
 exports.signup_post = [
     //validate and sanitize data
     body('name', 'Name must be at least 3 characters')
@@ -80,8 +81,6 @@ exports.signup_post = [
             res.status(400).json({ validationErrors })
         }
     })
-
-
 ]
 
 

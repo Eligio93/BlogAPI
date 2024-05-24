@@ -1,14 +1,18 @@
 var express = require('express');
 var router = express.Router();
-const postController = require ('../controller/postController')
+const postController = require('../controller/postController')
+const userController = require('../controller/userController');
+const passport = require('../passport-config');
 
-/* GET  blog home page. */
-router.get('/', function(req, res, next) {
-  res.json({message:'Welcome to my blog'});
-});
+/*Get All Posts*/
+router.get('/posts',postController.posts)
 
-router.get('/newPost',function(req,res,next){
-  res.json({message:'Get Form to create a post'})
-})
-router.post('/newPost',postController.newPost_post)
+
+
+
+
+
+
+
+
 module.exports = router;
