@@ -5,38 +5,35 @@ import { Link } from "react-router-dom";
 
 
 function Header() {
-    const { user, setUser,logOut } = useContext(AuthContext);
+    const { user, setUser, logOut } = useContext(AuthContext);
 
 
     return (
         <header>
-            <nav>
-                <Link to='/'>Home</Link>
-                <Link to='/posts'>Blog Posts</Link>
-                <Link to='/about'>About</Link>
-            </nav>
-            <h1>DrinkSofa</h1>
-            <div className="social">
-            </div>
-            <div className="authArea">
+            <div className="auth-area">
                 {user ? (
-                    <div className="headerLogout">
+                    <div className="auth-btn">
                         <img src="" alt="" />
                         <Link onClick={logOut}>Logout</Link>
                     </div>
                 ) : (
                     <>
-                        <div className="headerLogin">
+                        <div className="auth-btn">
                             <img src="" alt="" />
                             <Link to='/login'>Login</Link>
                         </div>
-                        <div className="headerRegister">
+                        <div className="auth-btn">
                             <img src="" alt="" />
                             <Link to='/signup'>Register</Link>
                         </div>
                     </>
                 )}
             </div>
+            <nav>
+                <Link to='/'>Home</Link>
+                <Link to='/posts'>Blog</Link>
+                <Link to='/about'>About</Link>
+            </nav>
 
         </header>
     )
