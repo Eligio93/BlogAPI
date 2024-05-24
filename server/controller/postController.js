@@ -2,8 +2,9 @@ const Post = require('../models/post')
 const asyncHandler = require('express-async-handler')
 
 /*GET all posts*/
-exports.posts=asyncHandler((req,res,next)=>{
-    res.json({message:'Get all posts'})
+exports.posts=asyncHandler(async (req,res,next)=>{
+    let posts = await Post.find({published:true});
+   res.json(posts)
 })
 
 
