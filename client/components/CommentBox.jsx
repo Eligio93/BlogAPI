@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "./AuthContext";
+import { useState } from "react";
 import Comment from "./Comment";
 
 
@@ -15,7 +14,7 @@ export default function CommentBox({ comments, user, handleComment }) {
             {comments && comments.length > 0 ? (
                 <ul>
                     {comments.map((comment) =>
-                        <li className="comment">
+                        <li className="comment" key={comment._id}>
                             <Comment
                                 message={comment.message}
                                 date={comment.date}
