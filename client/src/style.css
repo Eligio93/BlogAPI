@@ -1,0 +1,167 @@
+:root {
+    --teal: #016064;
+    --orange: #F27244;
+    --dark-green: #092b2c;
+    --dark-purple: #211949;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Exo 2', 'sans serif';
+}
+
+body {
+    height: 100vh;
+}
+
+#root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+
+/*----HEADER STYLE-----*/
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 30px 50px;
+    background-color: #211949;
+    color: white;
+}
+
+header nav,
+.auth-area {
+    display: flex;
+    gap: 20px;
+
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+    color: white;
+}
+
+
+/*-----HERO HOME STYLE-----*/
+.hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    padding-left: 50px;
+}
+
+.hero h1 {
+    font-size: 4vw;
+}
+
+.hero p {
+    font-size: 2vw;
+}
+
+.hero-btns {
+    margin-top: 30px;
+}
+
+.hero-btns a {
+    background-color: var(--orange);
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1.3vw;
+}
+
+
+/*-----BLOG PAGE STYLE-----*/
+.blog-section {
+    display: flex;
+    gap: 30px;
+    overflow-y: scroll;
+    padding: 50px;
+}
+
+.blog-aside {
+    width: 20%;
+}
+
+.post-list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+}
+
+.post-preview {
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+}
+
+.post-preview img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.post-preview-info h2{
+    margin-bottom:20px;
+}
+
+.post-preview-info {
+    display: flex;
+    flex-direction: column;
+    height:300px;
+    flex:1;
+}
+.post-preview-info p{
+    flex:1;
+}
+
+.read-more-btn {
+    margin-top:20px;
+    width: fit-content;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--dark-purple);
+}
+
+/*----STYLE POST DETAIL-----*/
+.post {
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    align-self: center;
+}
+
+.post img {
+    max-width: 100%;
+}
+
+.post-author {
+    display: flex;
+    align-items: center;
+}
+
+.post-author img {
+    height: 30px;
+}
+
+
+/*Foto di <a href="https://unsplash.com/it/@hannynaibaho?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Hanny Naibaho</a> su <a href="https://unsplash.com/it/foto/foto-di-vetro-pieno-PN61o73PR1M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>*/
+/*Foto di <a href="https://unsplash.com/it/@donramxn?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Ramón Salinero</a> su <a href="https://unsplash.com/it/foto/mano-umana-che-tiene-la-sfera-del-plasma-vEE00Hx5d0Q?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>*/
