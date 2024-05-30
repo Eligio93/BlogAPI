@@ -74,7 +74,7 @@ header a {
     margin-top: 30px;
 }
 
-.hero-btns a {
+.hero-btns a{
     background-color: var(--orange);
     padding: 10px;
     color: white;
@@ -162,6 +162,23 @@ header a {
     height: 30px;
 }
 
+/*-----ERROR PAGE-----*/
+#error-page{
+    margin:0 auto;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background-size: cover;
+    color: white;
+}
+#error-page a{
+    background-color: var(--orange);
+    padding: 10px;;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+
+}
 
 /*Foto di <a href="https://unsplash.com/it/@hannynaibaho?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Hanny Naibaho</a> su <a href="https://unsplash.com/it/foto/foto-di-vetro-pieno-PN61o73PR1M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>*/
 /*Foto di <a href="https://unsplash.com/it/@donramxn?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Ramón Salinero</a> su <a href="https://unsplash.com/it/foto/mano-umana-che-tiene-la-sfera-del-plasma-vEE00Hx5d0Q?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>*/
