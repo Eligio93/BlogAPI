@@ -31,25 +31,28 @@ exports.post_get = asyncHandler(async (req, res, next) => {
 })
 
 /*POST new post*/
-exports.newPost_post = async (req, res, next) => {
-    console.log(req)
-    cloudinary.uploader.upload(req.file.path).then(result => {
-        console.log(result)
-    })
-}
-// asyncHandler(async (req, res, next) => {
-//     // const post = new Post({
-//     //     title: req.body.title,
-//     //     date: req.body.date,
-//     //     body_text: req.body.body_text,
-//     //     comments: req.body.comments,
-//     //     author: req.body.author,
-//     //     published: req.body.published
-//     // })
-//     // await post.save()
-//     // res.json({ message: 'Post Created' })
-//     console.log(req)
-// })
-
-
-
+exports.newPost_post = asyncHandler(async (req, res, next) => {
+    // here you have req.body containing all datas and req.file containing the image
+    try {
+        let result = await cloudinary.uploader.upload(req.file.path);
+        let imgUrl=result.secure_url
+        const post = new Post({
+            title:req.body.title,
+            date: '30/05/2024',
+            description:req.body.description,
+            body_text: req.body.body,
+            comments: [],
+            author: req.body.author,
+            published: req.body.published,
+            featured: req.body.featured,
+            img:imgUrl
+        })
+        await post.save()
+    res.json({ message: 'Post Created' })
+    } catch (err) {
+        res.json(err.message)
+    }
+    // cloudinary.uploader.upload(req.file.path).then(result => {
+    //     console.log(result)
+    // })
+})
