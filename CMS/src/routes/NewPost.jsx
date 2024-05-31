@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios'
 
 export default function NewPost() {
-    const [file,setFile]=useState()
+    const [file, setFile] = useState()
     const [data, setData] = useState({
         title: '',
         description: '',
@@ -21,12 +21,12 @@ export default function NewPost() {
         e.preventDefault();
         const formData = new FormData();
         formData.append('img', file)
-        formData.append('title',data.title)
-        formData.append('description',data.description)
-        formData.append('body',data.body)
-        formData.append('author',data.author)
-        formData.append('published',data.published)
-        formData.append('featured',data.featured)
+        formData.append('title', data.title)
+        formData.append('description', data.description)
+        formData.append('body', data.body)
+        formData.append('author', data.author)
+        formData.append('published', data.published)
+        formData.append('featured', data.featured)
         try {
             let result = await axios.post('http://localhost:3000/blog/posts/newPost', formData)
 
@@ -38,10 +38,10 @@ export default function NewPost() {
         const { name, checked } = e.target;
         setData(prevData => ({ ...prevData, [name]: checked }))
     }
-    function handleTextInput(e){
-        const{name, value}= e.target;
-        setData((prevData)=>({
-            ...prevData,[name]:value
+    function handleTextInput(e) {
+        const { name, value } = e.target;
+        setData((prevData) => ({
+            ...prevData, [name]: value
         }))
     }
 
@@ -52,10 +52,10 @@ export default function NewPost() {
                 <input type="text" name='title' id='post-title' value={data.title} onChange={handleTextInput} />
             </label>
             <label htmlFor="post-description">Post Description:
-                <input type="text" name='description' id='post-description' value={data.description} onChange={handleTextInput}/>
+                <input type="text" name='description' id='post-description' value={data.description} onChange={handleTextInput} />
             </label>
             <label htmlFor="post-body">Post Body:
-                <input type="text" name='body' id='post-body' value={data.body} onChange={handleTextInput}/>
+                <input type="text" name='body' id='post-body' value={data.body} onChange={handleTextInput} />
             </label>
             <label htmlFor="img">Upload post Image:
                 <input id='img' type="file" name='img' onChange={handleFile} />
