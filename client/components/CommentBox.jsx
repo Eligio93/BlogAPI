@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Comment from "./Comment";
+import { Link } from "react-router-dom";
 
 
 export default function CommentBox({ comments, user, handleComment }) {
@@ -11,8 +12,9 @@ export default function CommentBox({ comments, user, handleComment }) {
 
     return (
         <div className="comment-box">
+            <h2>Comments</h2>
             {comments && comments.length > 0 ? (
-                <ul>
+                <ul className="comment-list">
                     {comments.map((comment) =>
                         <li className="comment" key={comment._id}>
                             <Comment
@@ -30,9 +32,10 @@ export default function CommentBox({ comments, user, handleComment }) {
             {user &&
                 <form>
                     <textarea name="comment-input" id="comment-input" onChange={handleMessage} value={message}></textarea>
-                    <button onClick={(e) => { handleComment(e, message); setMessage('') }}>Comment</button>
+                    <button className='comment-btn' onClick={(e) => { handleComment(e, message); setMessage('') }}>Comment</button>
                 </form>
             }
+            {!user && <Link to='/login' className="comment-btn">Login to comment</Link>}
         </div>
     )
 }

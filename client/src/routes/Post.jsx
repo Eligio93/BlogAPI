@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { useParams } from "react-router-dom"
-import postImg from '../img/postImg.jpg'
 import userAvatar from '../img/userAvatar.svg'
 import { AuthContext } from "../../components/AuthContext"
 import CommentBox from "../../components/CommentBox"
@@ -56,15 +55,17 @@ function Post() {
     return (
         <div className="post">
             <h1>{post.title}</h1>
-            <div className="post-author">
+            <div className="post-info">
                 <img src={userAvatar} alt="" />
-                <p>{post.author}</p>
+                <div className="post-author">
+                    <p>{'Article written by ' + post.author}</p>
+                    <p>{post.date}</p>
+                </div>
             </div>
-            <p>{post.date}</p>
-            {/*image should be taken from the actual post object*/}
-            <img src={postImg} alt="" />
-            {/*Here should be post description in italic and light grey*/}
-            <p>{post.body_text}</p>
+            <img src={post.img} alt="" />
+            <p className="post-description">{post.description}</p>
+            <p className="post-body">{post.body_text}</p>
+
             <CommentBox
                 comments={comments}
                 user={user}

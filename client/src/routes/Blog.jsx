@@ -50,35 +50,35 @@ export default function Blog() {
                         {featuredPosts ? (
                             featuredPosts.map((post) =>
                                 <li key={post._id}>
-                                    <p>{post.title}</p>
+                                    <Link to={'/posts/' + post._id}>{post.title}</Link>
                                 </li>
                             )
                         ) : (<p>There s no featured posts</p>)}
                     </ul>
                 </div>
             </aside>
-          
-                {posts ? (
-                    <ul className="post-list">
-                        {posts.map((post) =>
 
-                            <li className="post-preview" key={post._id}>
-                                <img src={post.img} alt="" />
-                                <div className="post-preview-info">
-                                    <h2>{post.title}</h2>
-                                    <p>{post.description}</p>
-                                    <Link to={`/posts/${post._id}`} className="read-more-btn">Read More</Link>
-                                </div>
+            {posts ? (
+                <ul className="post-list">
+                    {posts.map((post) =>
 
-                            </li>
+                        <li className="post-preview" key={post._id}>
+                            <img src={post.img} alt="" />
+                            <div className="post-preview-info">
+                                <h2>{post.title}</h2>
+                                <p>{post.description}</p>
+                                <Link to={`/posts/${post._id}`} className="read-more-btn">Read More</Link>
+                            </div>
 
-                        )}
-                    </ul>
-                ) : (
-                    <p>There s no post to be seen </p >
-                )
-                }
-          
+                        </li>
+
+                    )}
+                </ul>
+            ) : (
+                <p>There s no post to be seen </p >
+            )
+            }
+
 
         </div>
     )

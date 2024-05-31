@@ -26,7 +26,6 @@ exports.login_post = (req, res, next) => {
                 if (err) {
                     next(err)
                 }
-                console.log(user)
                 res.json({ token, user })
             })
         }
