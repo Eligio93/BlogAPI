@@ -5,6 +5,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Signup from './routes/Signup.jsx'
 import Login from './routes/Login.jsx'
 import Layout from './Layout.jsx'
+import Blog from './routes/Blog.jsx'
+import Post from './routes/Post.jsx'
+import ErrorPage from './routes/ErrorPage.jsx'
 import { AuthProvider } from '../components/AuthContext.jsx'
 import './style.css'
 
@@ -12,6 +15,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -24,6 +28,12 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />
+      },{
+        path:'/posts',
+        element : <Blog />
+      },{
+        path:'/posts/:postId',
+        element: <Post />
       }
     ]
   },
