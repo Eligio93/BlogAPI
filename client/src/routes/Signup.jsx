@@ -46,7 +46,7 @@ export default function Signup() {
         }
     }
     return (
-        <>
+        <div className="signUp">
             {fetchingError && <p>{fetchingError}</p>}
             {serverResponse && <p>{serverResponse}</p>}
             {user ? (
@@ -56,22 +56,26 @@ export default function Signup() {
 
                 </>
             ) : (
-                <form>
-                    <label htmlFor="name">Name:
-                        <input type="text" name="name" id="name" value={data.name} onChange={handleChange} />
+                <form className="form">
+                    <label htmlFor="su-name">Name:
                     </label>
-                    <label htmlFor="lastName">LastName:
-                        <input type="text" name="lastName" id="lastName" value={data.lastName} onChange={handleChange} />
+                    <input type="text" name="name" id="su-name" value={data.name} onChange={handleChange} />
+
+                    <label htmlFor="su-lastName">LastName:
                     </label>
-                    <label htmlFor="email">Email:
-                        <input type="email" name="email" id="email" value={data.email} onChange={handleChange} />
+                    <input type="text" name="lastName" id="su-lastName" value={data.lastName} onChange={handleChange} />
+
+                    <label htmlFor="su-email">Email:
                     </label>
-                    <label htmlFor="password">Password:
-                        <input type="password" name="password" id="password" value={data.password} onChange={handleChange} autoComplete="on" />
+                    <input type="email" name="email" id="su-email" value={data.email} onChange={handleChange} />
+
+                    <label htmlFor="su-password">Password:
                     </label>
-                    <button onClick={handleSubmit}>Invia</button>
+                    <input type="password" name="password" id="su-password" value={data.password} onChange={handleChange} autoComplete="on" />
+
+                    <button onClick={handleSubmit}>Sign up</button>
                 </form>)}
 
-        </>
+        </div>
     )
 }
