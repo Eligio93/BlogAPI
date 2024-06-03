@@ -41,12 +41,11 @@ export default function Blog() {
             <aside className="blog-aside">
                 {user && <div className="blog-user">
                     <h2>Welcome {user.name}</h2>
-                    <Link to='/posts/newPost'>Create new Post</Link>
                 </div>}
 
                 <div className="featured-posts">
                     <h2>Featured Posts</h2>
-                    <ul>
+                    <ul className="featured-posts-list">
                         {featuredPosts ? (
                             featuredPosts.map((post) =>
                                 <li key={post._id}>
