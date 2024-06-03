@@ -3,7 +3,7 @@
     --orange: #F27244;
     --dark-green: #092b2c;
     --dark-purple: #211949;
-    --light-grey:#FFF5EC;
+    --light-orange:#FFF5EC;
 }
 
 * {
@@ -95,6 +95,39 @@ header a {
 
 .blog-aside {
     width: 20%;
+    padding: 30px;
+}
+.blog-user h2{
+    margin-bottom:20px;
+    color: var(--orange);
+}
+.featured-posts{
+    border-bottom:1px solid var(--dark-purple);
+    padding-bottom:20px;
+}
+
+.featured-posts h2{
+    color:white;
+    background-color: var(--dark-purple);
+    padding:10px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+.featured-posts-list{
+    display:flex;
+    flex-direction: column;
+    gap:15px;
+    list-style-type: none;
+}
+.featured-posts a{
+    text-decoration: none;
+    color: var(--dark-purple);
+    font-weight: bold;
+    font-size: 1.2vw;
+}
+.featured-posts a:hover{
+border-bottom:1px solid var(--dark-purple)
 }
 
 .post-list {
@@ -186,7 +219,7 @@ header a {
     display:flex;
     flex-direction: column;
     gap:20px;
-    background-color: var(--orange);
+    background-color: lightgrey;
     padding: 20px;
     border-radius: 10px;
     color: var(--dark-purple)
@@ -204,7 +237,7 @@ header a {
    gap:10px;
    padding:10px;
    border-radius: 10px;
-   background-color: var(--light-grey);
+   background-color: var(--light-orange);
 
 }
 .comment-info{
@@ -245,6 +278,13 @@ header a {
     border-radius: 10px;
     text-decoration: none;
 
+}
+/*-----SIGNUP Page -----*/
+.form{
+    display:flex;
+    flex-direction: column;
+    width:300px;
+    margin: 0 auto;
 }
 
 /*Foto di <a href="https://unsplash.com/it/@hannynaibaho?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Hanny Naibaho</a> su <a href="https://unsplash.com/it/foto/foto-di-vetro-pieno-PN61o73PR1M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>*/
