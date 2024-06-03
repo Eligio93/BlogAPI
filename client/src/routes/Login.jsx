@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../components/AuthContext"
+import loginImg from '../img/loginImg.jpg'
 
 
 
@@ -42,19 +43,24 @@ export default function Login() {
     }
 
     return (
-        <>  {/*in case there are errors*/}
-            {error && <p>{error}</p>}
+        <>  
+        <div className="login">
+        <img src={loginImg} alt="" />
+        {error && <p>{error}</p>}
             {user ? (<p>You are already logged as {user.name}. Not you? <Link to='/logout'>LogOut</Link></p>) : (
-                <form>
+                <form className="form">
                     <label htmlFor="email">Email:
-                        <input type="email" name="email" id="email" value={data.email} onChange={handleChange} />
                     </label>
+                    <input type="email" name="email" id="email" value={data.email} onChange={handleChange} />
                     <label htmlFor="password">Password:
-                        <input type="password" name="password" id="password" value={data.password} onChange={handleChange} autoComplete="on" />
                     </label>
-                    <button onClick={handleLogIn}>LogIn</button>
+                    <input type="password" name="password" id="password" value={data.password} onChange={handleChange} autoComplete="on" />
+                    <button onClick={handleLogIn} className="login-btn">LogIn</button>
                 </form>
             )}
+
+        </div>
+          
         </>
 
     )

@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import axios from 'axios'
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../components/AuthContext";
+import signUpImg from '../img/signupImg.jpg'
 
 
 
@@ -47,6 +48,7 @@ export default function Signup() {
     }
     return (
         <div className="signUp">
+            <img src={signUpImg}alt="" />
             {fetchingError && <p>{fetchingError}</p>}
             {serverResponse && <p>{serverResponse}</p>}
             {user ? (
@@ -61,7 +63,7 @@ export default function Signup() {
                     </label>
                     <input type="text" name="name" id="su-name" value={data.name} onChange={handleChange} />
 
-                    <label htmlFor="su-lastName">LastName:
+                    <label htmlFor="su-lastName">Last Name:
                     </label>
                     <input type="text" name="lastName" id="su-lastName" value={data.lastName} onChange={handleChange} />
 
@@ -73,7 +75,7 @@ export default function Signup() {
                     </label>
                     <input type="password" name="password" id="su-password" value={data.password} onChange={handleChange} autoComplete="on" />
 
-                    <button onClick={handleSubmit}>Sign up</button>
+                    <button onClick={handleSubmit} className="signup-btn">Sign up</button>
                 </form>)}
 
         </div>
