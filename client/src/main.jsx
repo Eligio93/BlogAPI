@@ -8,6 +8,7 @@ import Layout from './Layout.jsx'
 import Blog from './routes/Blog.jsx'
 import Post from './routes/Post.jsx'
 import ErrorPage from './routes/ErrorPage.jsx'
+import About from './routes/About.jsx'
 import { AuthProvider } from '../components/AuthContext.jsx'
 import './style.css'
 
@@ -34,6 +35,9 @@ const router = createBrowserRouter([
       },{
         path:'/posts/:postId',
         element: <Post />
+      },{
+        path:'/about',
+        element:<About />
       }
     ]
   },
