@@ -8,7 +8,7 @@ import loginImg from '../img/loginImg.jpg'
 
 export default function Login() {
     const navigate = useNavigate();
-    const { jwt, setJwt, user, setUser } = useContext(AuthContext)
+    const { jwt, setJwt, user, setUser, logOut } = useContext(AuthContext)
     const [data, setData] = useState({
         email: '',
         password: ''
@@ -27,7 +27,8 @@ export default function Login() {
             setJwt(token)
             setUser(response.data.user)
             setError()
-            navigate('/')
+            /* -1 brings back the user to the page where he was before to login*/
+            navigate(-1)
 
         } catch (err) {
             setError(err.response.data.message)
@@ -46,9 +47,10 @@ export default function Login() {
         <>  
         <div className="login">
         <img src={loginImg} alt="" />
-        {error && <p>{error}</p>}
-            {user ? (<p>You are already logged as {user.name}. Not you? <Link to='/logout'>LogOut</Link></p>) : (
+        
+            {user ? (<p>You are already logged as {user.name}. Not you? <Link to='/' onClick={logOut}>LogOut</Link></p>) : (
                 <form className="form">
+                    {error && <p className="error-msg">{error}</p>}
                     <label htmlFor="email">Email:
                     </label>
                     <input type="email" name="email" id="email" value={data.email} onChange={handleChange} />
