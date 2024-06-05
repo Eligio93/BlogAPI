@@ -3,7 +3,7 @@
     --orange: #F27244;
     --dark-green: #092b2c;
     --dark-purple: #211949;
-    --light-orange:#FFF5EC;
+    --light-orange: #FFF5EC;
 }
 
 * {
@@ -75,7 +75,7 @@ header a {
     margin-top: 30px;
 }
 
-.hero-btns a{
+.hero-btns a {
     background-color: var(--orange);
     padding: 10px;
     color: white;
@@ -97,37 +97,42 @@ header a {
     width: 20%;
     padding: 30px;
 }
-.blog-user h2{
-    margin-bottom:20px;
+
+.blog-user h2 {
+    margin-bottom: 20px;
     color: var(--orange);
 }
-.featured-posts{
-    border-bottom:1px solid var(--dark-purple);
-    padding-bottom:20px;
+
+.featured-posts {
+    border-bottom: 1px solid var(--dark-purple);
+    padding-bottom: 20px;
 }
 
-.featured-posts h2{
-    color:white;
+.featured-posts h2 {
+    color: white;
     background-color: var(--dark-purple);
-    padding:10px;
+    padding: 10px;
     text-align: center;
     margin-bottom: 20px;
     border-radius: 10px;
 }
-.featured-posts-list{
-    display:flex;
+
+.featured-posts-list {
+    display: flex;
     flex-direction: column;
-    gap:15px;
+    gap: 15px;
     list-style-type: none;
 }
-.featured-posts a{
+
+.featured-posts a {
     text-decoration: none;
     color: var(--dark-purple);
     font-weight: bold;
     font-size: 1.2vw;
 }
-.featured-posts a:hover{
-border-bottom:1px solid var(--dark-purple)
+
+.featured-posts a:hover {
+    border-bottom: 1px solid var(--dark-purple)
 }
 
 .post-list {
@@ -150,22 +155,27 @@ border-bottom:1px solid var(--dark-purple)
     object-fit: cover;
     border-radius: 10px;
 }
-.post-preview-info h2{
-    margin-bottom:20px;
+
+.post-preview-info h2 {
+    margin-bottom: 20px;
 }
 
 .post-preview-info {
     display: flex;
     flex-direction: column;
-    height:300px;
-    flex:1;
-}
-.post-preview-info p{
-    flex:1;
+    height: 300px;
+    flex: 1;
 }
 
-.read-more-btn, .comment-btn,.signup-btn,.login-btn{
-    margin-top:20px;
+.post-preview-info p {
+    flex: 1;
+}
+
+.read-more-btn,
+.comment-btn,
+.signup-btn,
+.login-btn {
+    margin-top: 20px;
     width: fit-content;
     text-decoration: none;
     font-weight: bold;
@@ -181,8 +191,8 @@ border-bottom:1px solid var(--dark-purple)
     flex-direction: column;
     max-width: 700px;
     align-self: center;
-    gap:20px;
-    padding:50px 0;
+    gap: 20px;
+    padding: 50px 0;
 }
 
 .post img {
@@ -192,114 +202,146 @@ border-bottom:1px solid var(--dark-purple)
 .post-info {
     display: flex;
     align-items: center;
-    gap:10px;
+    gap: 10px;
 }
 
 .post-info img {
     height: 30px;
     background-color: var(--dark-purple);
     border-radius: 50%;
-    
+
 }
-.post-description{
-    color:grey;
+
+.post-description {
+    color: grey;
     font-style: italic;
     font-weight: bold;
     font-size: 1vw;
     /* margin-top:20px; */
 }
-.post-body{
+
+.post-body {
     font-size: 1.2vw;
-    border-bottom:1px solid var(--dark-purple);
-    padding-bottom:30px;
+    border-bottom: 1px solid var(--dark-purple);
+    padding-bottom: 30px;
 
 }
+
 /*-----COMMENT BOX-----*/
-.comment-box{
-    display:flex;
+.comment-box {
+    display: flex;
     flex-direction: column;
-    gap:20px;
+    gap: 20px;
     background-color: lightgrey;
     padding: 20px;
     border-radius: 10px;
     color: var(--dark-purple)
 }
-.comment-list{
-    display:flex;
+
+.comment-list {
+    display: flex;
     flex-direction: column;
-    gap:20px;
+    gap: 20px;
 }
-.comment{
-   list-style-type: none;
-   display: flex;
-   flex-direction: column;
-   border: 1px solid black;
-   gap:10px;
-   padding:10px;
-   border-radius: 10px;
-   background-color: var(--light-orange);
+
+.comment {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--light-orange);
 
 }
-.comment-info{
-    display:flex;
+
+.comment-info {
+    display: flex;
     align-items: center;
-    gap:10px;
+    gap: 10px;
 
 }
-.comment-info img{
-    height: 30px;;
+
+.comment-info img {
+    height: 30px;
+    ;
 }
-.comment-author :nth-child(1){
+
+.comment-author :nth-child(1) {
     font-weight: bold;
 }
-.comment-date{
+
+.comment-date {
     font-style: italic;
     font-size: small;
 }
 
-.comment-message{
-    border-left:1px solid var(--dark-purple);
-    padding:10px;
-    margin-left:15px;
+.comment-message {
+    border-left: 1px solid var(--dark-purple);
+    padding: 10px;
+    margin-left: 15px;
 }
+
+#comment-input {
+    width: 100%;
+    height: 100px;
+    padding: 5px;
+    resize: none;
+}
+
 /*-----ERROR PAGE-----*/
-#error-page{
-    margin:0 auto;
+#error-page {
+    margin: 0 auto;
     height: 100%;
     width: 100%;
     text-align: center;
     background-size: cover;
     color: white;
 }
-#error-page a{
+
+#error-page a {
     background-color: var(--orange);
-    padding: 10px;;
+    padding: 10px;
+    ;
     color: white;
     border-radius: 10px;
     text-decoration: none;
 
 }
+
 /*-----SIGNUP Page -----*/
-.signUp,.login{
-    display:flex;
+.signUp,
+.login {
+    display: flex;
     align-items: center;
-    height:calc(100% - 60px);
+    height: calc(100% - 60px);
 }
-.signUp img, .login img{
+
+.signUp img,
+.login img {
     height: 100%;
-    padding:30px;
+    padding: 30px;
 }
-.form{
-    display:flex;
+
+.form {
+    display: flex;
     flex-direction: column;
 }
-.form label{
-    font-size:1.5vw;
+
+.form label {
+    font-size: 1.5vw;
     text-transform: uppercase;
 }
-.form input{
+
+.form input {
     font-size: 1.2vw;
-    margin-bottom: 10px;;
+    margin-bottom: 10px;
+    ;
+}
+
+.error-msg {
+    color: red;
 }
 
 /*Foto di <a href="https://unsplash.com/it/@hannynaibaho?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Hanny Naibaho</a> su <a href="https://unsplash.com/it/foto/foto-di-vetro-pieno-PN61o73PR1M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>*/
