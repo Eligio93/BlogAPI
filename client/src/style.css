@@ -184,6 +184,20 @@ header a {
     border-radius: 5px;
     background-color: var(--dark-purple);
 }
+/*-----LOADING-----*/
+.loading{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.loading img{
+    height: 100px;
+}
+.loading p{
+    color: var(--dark-purple);
+    font-weight: bold;
+}
 
 /*----STYLE POST DETAIL-----*/
 .post {
@@ -342,6 +356,9 @@ header a {
 
 .error-msg {
     color: red;
+}
+.success-msg{
+    color:green;
 }
 
 /*Foto di <a href="https://unsplash.com/it/@hannynaibaho?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Hanny Naibaho</a> su <a href="https://unsplash.com/it/foto/foto-di-vetro-pieno-PN61o73PR1M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>*/
