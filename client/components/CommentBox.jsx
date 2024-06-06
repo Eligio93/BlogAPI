@@ -30,9 +30,9 @@ export default function CommentBox({ comments, user, handleComment }) {
                 <p>There's no comments for this post</p>
             )}
             {user &&
-                <form>
-                    <textarea name="comment-input" id="comment-input" onChange={handleMessage} value={message}></textarea>
-                    <button className='comment-btn' onClick={(e) => { handleComment(e, message); setMessage('') }}>Comment</button>
+                <form onSubmit={(e) => { handleComment(e, message); setMessage('') }}>
+                    <textarea name="comment-input" id="comment-input" onChange={handleMessage} value={message} required></textarea>
+                    <button type='submit' className='comment-btn'>Comment</button>
                 </form>
             }
             {!user && <Link to='/login' className="comment-btn">Login to comment</Link>}
