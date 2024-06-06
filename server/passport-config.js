@@ -14,8 +14,8 @@ passport.use(
             if (!user) {
                 return done(null, false, { message: 'Incorrect Email' })
             };
-            // const matchPassword = await bcrypt.compare(password, user.password)
-            if (user.password !== password) {
+            const matchPassword = await bcrypt.compare(password, user.password)
+            if (!matchPassword) {
                 return done(null, false, { message: 'Incorrect Password' })
             };
             return done(null, user)

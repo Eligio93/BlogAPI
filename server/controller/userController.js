@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler')
 const passport = require('../passport-config')
 const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 
 
 
@@ -63,18 +64,20 @@ exports.signup_post = [
     asyncHandler(async (req, res, next) => {
         const validationErrors = validationResult(req);
         if (validationErrors.isEmpty()) {
-            //encrypt pssw
-            //create new User
-            const user = new User({
-                name: req.body.name,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                password: req.body.password,
-                is_pro: req.body.is_pro,
-                admin: req.body.admin
-            })
-            await user.save()
-            res.json({ message: 'User Created' })
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            try {
+                const user = new User({
+                    name: req.body.name,
+                    lastName: req.body.lastName,
+                    email: req.body.email,
+                    password: hashedPassword,
+                    admin: req.body.admin
+                })
+                await user.save()
+                res.json({ message: 'User Created' })
+            } catch (err) {
+                return next(err)
+            }
         } else {
             //set response to 400 in case datas are not valid
             res.status(400).json({ validationErrors })
