@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import userAvatar from '../img/userAvatar.svg'
 import { AuthContext } from "../../components/AuthContext"
 import CommentBox from "../../components/CommentBox"
+import Loading from "../../components/Loading"
 
 function Post() {
     const [post, setPost] = useState()
@@ -46,7 +47,7 @@ function Post() {
     }
 
     if (loading) {
-        return <p>Loading...</p>
+        return <Loading />
     }
     if (error) {
         return <p>{error}</p>

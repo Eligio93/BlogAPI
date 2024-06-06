@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import postImg from '../img/postImg.jpg'
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../components/AuthContext";
+import Loading from '../../components/Loading'
 
 export default function Blog() {
     const [posts, setPosts] = useState()
@@ -21,7 +22,10 @@ export default function Blog() {
             } catch (err) {
                 setError(err.message)
             } finally {
-                setLoading(false)
+                setTimeout(()=>{
+                    setLoading(false)
+                },1000)
+               
             }
         }
         getPosts()
@@ -30,7 +34,7 @@ export default function Blog() {
 
     // const featuredPosts= posts.filter((post)=>post.featured)
     if (loading) {
-        return <p>Loading...</p>
+        return <Loading />
     }
     if (error) {
         return <p>{error}</p>
