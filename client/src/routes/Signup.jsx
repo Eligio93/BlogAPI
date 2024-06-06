@@ -8,7 +8,7 @@ import signUpImg from '../img/signupImg.jpg'
 
 
 export default function Signup() {
-    const { user, setUSer } = useContext(AuthContext)
+    const { user, setUSer,logOut } = useContext(AuthContext)
     //hook to redirect the user after signup
     const navigate = useNavigate()
     const [data, setData] = useState({
@@ -48,34 +48,30 @@ export default function Signup() {
     }
     return (
         <div className="signUp">
-            <img src={signUpImg}alt="" />
-            {fetchingError && <p>{fetchingError}</p>}
-            {serverResponse && <p>{serverResponse}</p>}
+            <img src={signUpImg} alt="" />
             {user ? (
-                <>
-                    <p>To register a new account you need to logOut first</p>
-                    <Link to='/logout'>Logout</Link>
+            <p>You are already logged as {user.name}. <Link to='/' onClick={logOut}>LogOut</Link> to register a new Account</p>) : (
+                <form className="form" onSubmit={handleSubmit}>
+                    {fetchingError && <p className="error-msg">{fetchingError}</p>}
+                    {serverResponse && <p className="success-msg">{serverResponse}</p>}
 
-                </>
-            ) : (
-                <form className="form">
                     <label htmlFor="su-name">Name:
                     </label>
-                    <input type="text" name="name" id="su-name" value={data.name} onChange={handleChange} />
+                    <input type="text" name="name" id="su-name" value={data.name} onChange={handleChange} required />
 
                     <label htmlFor="su-lastName">Last Name:
                     </label>
-                    <input type="text" name="lastName" id="su-lastName" value={data.lastName} onChange={handleChange} />
+                    <input type="text" name="lastName" id="su-lastName" value={data.lastName} onChange={handleChange} required />
 
                     <label htmlFor="su-email">Email:
                     </label>
-                    <input type="email" name="email" id="su-email" value={data.email} onChange={handleChange} />
+                    <input type="email" name="email" id="su-email" value={data.email} onChange={handleChange} required />
 
                     <label htmlFor="su-password">Password:
                     </label>
-                    <input type="password" name="password" id="su-password" value={data.password} onChange={handleChange} autoComplete="on" />
+                    <input type="password" name="password" id="su-password" value={data.password} onChange={handleChange} autoComplete="on" required />
 
-                    <button onClick={handleSubmit} className="signup-btn">Sign up</button>
+                    <button type="submit" className="signup-btn">Sign up</button>
                 </form>)}
 
         </div>
