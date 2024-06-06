@@ -69,7 +69,6 @@ function Post() {
             <CommentBox
                 comments={comments}
                 user={user}
-                // handleMessage={handleMessage}
                 handleComment={handleComment}
             />
         </div>

@@ -52,7 +52,4 @@ exports.newPost_post = asyncHandler(async (req, res, next) => {
     } catch (err) {
         res.json(err.message)
     }
-    // cloudinary.uploader.upload(req.file.path).then(result => {
-    //     console.log(result)
-    // })
 })
