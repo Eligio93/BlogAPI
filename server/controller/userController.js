@@ -14,24 +14,42 @@ exports.user_get = (req, res) => {
 
 
 /*LOGIN POST*/
-exports.login_post = (req, res, next) => {
-    passport.authenticate('local', { session: false }, (err, user, info) => {
-        if (err) {
-            return res.status(500).json({ message: 'Internal server Error' })
-        }
-        if (!user) {
-            return res.status(400).json({ message: info.message })
-        }
-        if (user) {
-            jwt.sign({ id: user._id }, 'secret', (err, token) => {
+exports.login_post = [
+    body('email')
+        .trim()
+        .isEmail()
+        .escape(),
+    body('password')
+        .trim()
+        .isLength({ min: 6 })
+        .escape(),
+    asyncHandler(async (req, res, next) => {
+        const validationErrors = validationResult(req)
+        if (validationErrors.isEmpty()) {
+            passport.authenticate('local', { session: false }, (err, user, info) => {
                 if (err) {
-                    next(err)
+                    return res.status(500).json({ message: 'Internal server Error' })
                 }
-                res.json({ token, user })
-            })
+                if (!user) {
+                    return res.status(400).json({ message: info.message })
+                }
+                if (user) {
+                    jwt.sign({ id: user._id }, 'secret', (err, token) => {
+                        if (err) {
+                            next(err)
+                        }
+                        console.log(user)
+                        res.json({ token, user })
+                    })
+                }
+            })(req, res, next)
+        }else {
+            //set response to 400 in case datas are not valid
+            res.status(400).json({ validationErrors })
         }
-    })(req, res, next)
-}
+        })
+    
+]
 
 
 /*SIGNUP POST*/
@@ -59,7 +77,7 @@ exports.signup_post = [
         .escape(),
     body('password', 'Password must be at least 4 characters')
         .trim()
-        .isLength({ min: 4 })
+        .isLength({ min: 6 })
         .escape(),
     asyncHandler(async (req, res, next) => {
         const validationErrors = validationResult(req);
