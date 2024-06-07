@@ -25,6 +25,7 @@ export default function Login() {
             let token = response.data.token
             localStorage.setItem('token', token)
             setJwt(token)
+            console.log(response.data.user)
             setUser(response.data.user)
             setError()
             /* -1 brings back the user to the page where he was before to login*/
@@ -33,6 +34,11 @@ export default function Login() {
         } catch (err) {
             setError(err.response.data.message)
         }
+    }
+    //handle Guest Login
+    const handleGuestLogin = function () {
+        setData({ email: 'guest@guest.com', password: 'guestguest' })
+        handleLogIn()
     }
 
     //handle changes of inputs
@@ -44,25 +50,26 @@ export default function Login() {
     }
 
     return (
-        <>  
-        <div className="login">
-        <img src={loginImg} alt="" />
-        
-            {user ? (<p>You are already logged as {user.name}. Not you? <Link to='/' onClick={logOut}>LogOut</Link></p>) : (
-                <form className="form">
-                    {error && <p className="error-msg">{error}</p>}
-                    <label htmlFor="email">Email:
-                    </label>
-                    <input type="email" name="email" id="email" value={data.email} onChange={handleChange} />
-                    <label htmlFor="password">Password:
-                    </label>
-                    <input type="password" name="password" id="password" value={data.password} onChange={handleChange} autoComplete="on" />
-                    <button onClick={handleLogIn} className="login-btn">LogIn</button>
-                </form>
-            )}
+        <>
+            <div className="login">
+                <img src={loginImg} alt="" />
 
-        </div>
-          
+                {user ? (<p>You are already logged as {user.name}. Not you? <Link to='/' onClick={logOut}>LogOut</Link></p>) : (
+                    <form className="form" onSubmit={handleLogIn}>
+                        {error && <p className="error-msg">{error}</p>}
+                        <label htmlFor="email">Email:
+                        </label>
+                        <input type="email" name="email" id="email" value={data.email} onChange={handleChange} required />
+                        <label htmlFor="password">Password:
+                        </label>
+                        <input type="password" name="password" id="password" value={data.password} onChange={handleChange} autoComplete="on" required minLength={6} />
+                        <button type="submit" className="login-btn">LogIn</button>
+                        <button className="login-btn" onClick={handleGuestLogin}>Guest Login</button>
+                    </form>
+                )}
+
+            </div>
+
         </>
 
     )
