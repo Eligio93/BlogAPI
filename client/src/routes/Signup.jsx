@@ -42,8 +42,7 @@ export default function Signup() {
                 }, 2000)
             }
         } catch (err) {
-            console.log(err)
-            setFetchingError(err.message)
+            setFetchingError(err.response.data.message)
         }
     }
     return (
@@ -69,7 +68,7 @@ export default function Signup() {
 
                     <label htmlFor="su-password">Password:
                     </label>
-                    <input type="password" name="password" id="su-password" value={data.password} onChange={handleChange} autoComplete="on" required />
+                    <input type="password" name="password" id="su-password" value={data.password} onChange={handleChange} autoComplete="on" required minLength={6} />
 
                     <button type="submit" className="signup-btn">Sign up</button>
                 </form>)}
