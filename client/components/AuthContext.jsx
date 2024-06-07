@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
             }
         }
         getUser()
-    }, [jwt])
+    }, [])
 
     function logOut() {
         localStorage.removeItem('token')
