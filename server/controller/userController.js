@@ -15,11 +15,11 @@ exports.user_get = (req, res) => {
 
 /*LOGIN POST*/
 exports.login_post = [
-    body('email')
+    body('email','Please enter a valid email')
         .trim()
         .isEmail()
         .escape(),
-    body('password')
+    body('password','Password must be at least 6 characters')
         .trim()
         .isLength({ min: 6 })
         .escape(),
@@ -38,14 +38,13 @@ exports.login_post = [
                         if (err) {
                             next(err)
                         }
-                        console.log(user)
                         res.json({ token, user })
                     })
                 }
             })(req, res, next)
         }else {
             //set response to 400 in case datas are not valid
-            res.status(400).json({ validationErrors })
+            res.status(400).json({ message:validationErrors.errors[0].msg })
         }
         })
     
@@ -98,7 +97,7 @@ exports.signup_post = [
             }
         } else {
             //set response to 400 in case datas are not valid
-            res.status(400).json({ validationErrors })
+            res.status(400).json({ message:validationErrors.errors[0].msg })
         }
     })
 ]
