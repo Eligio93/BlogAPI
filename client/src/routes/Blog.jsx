@@ -17,7 +17,7 @@ export default function Blog() {
         async function getPosts() {
             try {
                 let results = await axios.get('http://localhost:3000/blog/posts')
-                setPosts(results.data)
+                setPosts(results.data.filter((post)=>post.published))
                 setFeaturedPosts(results.data.filter((post) => post.featured))
             } catch (err) {
                 setError(err.message)
