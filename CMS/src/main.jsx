@@ -7,8 +7,11 @@ import Layout from './Layout.jsx'
 import Login from './routes/Login.jsx'
 import NewPost from './routes/NewPost.jsx'
 import { AuthProvider } from '../components/AuthContext.jsx'
+import Posts from './routes/Posts.jsx'
+
 
 const router = createBrowserRouter([
+  
   {
     path: '/',
     element: <Layout />,
@@ -20,12 +23,33 @@ const router = createBrowserRouter([
       }, {
         path: "/newPost",
         element: <NewPost />
+      }, {
+        path: '/posts',
+        element: <Posts
+          // posts={posts}
+        />
+      }, {
+        path: '/posts/:status',
+        element: <Posts
+          // posts={posts}
+        />
       }
+      // }, {
+      //   path: '/posts/published',
+      //   element: <Posts
+      //   // posts={posts.filter((post)=>post.published)} 
+      //   />
+      // }, {
+      //   path: '/posts/unpublished',
+      //   element: <Posts 
+      //   // posts={posts.filter((post)=>!post.published)}
+      //   />
+      // }
 
     ]
-  },{
-    path:'/login',
-    element:<Login />
+  }, {
+    path: '/login',
+    element: <Login />
   }
 
 ]);
