@@ -14,7 +14,7 @@ cloudinary.config({
 
 /*GET all posts*/
 exports.posts = asyncHandler(async (req, res, next) => {
-    let posts = await Post.find({ published: true });
+    let posts = await Post.find({});
     res.json(posts)
 })
 
