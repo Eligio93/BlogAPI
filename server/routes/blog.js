@@ -15,10 +15,14 @@ router.get('/posts',postController.posts)
 router.get('/posts/:postId',postController.post_get);
 
 /*POST new Post *PROTECTED* */
-router.post('/posts/newPost',upload.single('img'),postController.newPost_post)
+router.post('/posts/newPost',/*passport.authenticate('jwt', { session: false }),*/upload.single('img'),postController.newPost_post)
+
+/*EDIT POST*/
+router.put('/posts/edit/:postId',postController.editPost)
 
 /*POST comment*/
 router.post('/posts/:postId/comments/newComment',commentController.comment_post)
+
 
 
 
