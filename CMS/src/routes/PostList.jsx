@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import userIcon from '../img/userIcon.svg'
 import commentIcon from '../img/commentIcon.svg'
 import calendarIcon from '../img/calendarIcon.svg'
+import Loading from "../../components/Loading";
 
 export default function PostList() {
     const navigate = useNavigate()
@@ -34,7 +35,7 @@ export default function PostList() {
     }, [status])
 
     if (loading) {
-        return <p>Loading...</p>
+        return <Loading />
     }
     if (error) {
         return <p>{error}</p>
