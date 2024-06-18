@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import userIcon from '../img/userIcon.svg'
+import commentIcon from '../img/commentIcon.svg'
+import calendarIcon from '../img/calendarIcon.svg'
 
-export default function Posts() {
+export default function PostList() {
+    const navigate = useNavigate()
     const { status } = useParams();
     const [posts, setPosts] = useState();
     const [error, setError] = useState();
@@ -37,11 +41,30 @@ export default function Posts() {
     }
 
     return (
-        <ul>
+        <ul className="post-list">
             {posts.map((post) =>
-                <li key={post._id}>
+
+                <li key={post._id} className="listed-post" onClick={() => navigate(`/posts/${post._id}`)}>
+
                     <h2>{post.title}</h2>
+                    <div className="listed-post-info">
+                        <div className="listed-post-author">
+                            <img src={userIcon} alt="" />
+                            <p>{post.author}</p>
+                        </div>
+                        <div className="listed-post-comments">
+                            <img src={commentIcon} alt="" />
+                            <p>{post.comments.length}</p>
+                        </div>
+                        <div className="listed-post-date">
+                            <img src={calendarIcon} alt="" />
+                            <p>{post.date}</p>
+                        </div>
+                    </div>
+
                 </li>
+
+
             )}
         </ul>
     )
