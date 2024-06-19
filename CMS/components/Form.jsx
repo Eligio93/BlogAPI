@@ -1,7 +1,16 @@
 import { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-export default function Form({ handleSubmit, handleTextInput, handleFile, handleCheckbox, data, disableField, handleEditor }) {
+export default function Form({
+    handleSubmit,
+    handleTextInput,
+    handleFile,
+    handleCheckbox,
+    data,
+    disableField,
+    handleEditor,
+    deleteBtn,
+    handleDelete }) {
     const editorRef = useRef(null);
     return (
         <form encType='multipart/form-data' className='form' onSubmit={handleSubmit}>
@@ -37,7 +46,7 @@ export default function Form({ handleSubmit, handleTextInput, handleFile, handle
                 />
             </label>
             <label htmlFor="img">Upload post Image:
-                <input id='img' type="file" name='img' onChange={handleFile} disabled={disableField} />
+                <input id='img' type="file" name='img' onChange={handleFile} disabled={disableField} required />
             </label>
             <label htmlFor="post-published">Published?
                 <input type="checkbox" name="published" id="post-published" checked={data.published} onChange={handleCheckbox} />
@@ -45,7 +54,8 @@ export default function Form({ handleSubmit, handleTextInput, handleFile, handle
             <label htmlFor="post-featured">Featured?
                 <input type="checkbox" name="featured" id="post-featured" checked={data.featured} onChange={handleCheckbox} />
             </label>
-            <button type='submit'>Submit</button>
+            <button type='submit'>Send</button>
+            {deleteBtn && <button onClick={handleDelete}>Delete</button>}
         </form>
 
     )
