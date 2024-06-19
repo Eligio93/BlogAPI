@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../components/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Form from '../../components/Form';
+import Loading from '../../components/Loading';
 
 
 
@@ -78,7 +79,7 @@ export default function NewPost() {
 
 
     if (loading) {
-        return <p>Loading...</p>
+        return <Loading />
     }
     return (
         <>
@@ -93,6 +94,7 @@ export default function NewPost() {
                     handleEditor={handleEditor}
                     data={data}
                     disableField={false}
+                    deleteBtn={false}
                 />
                 </>
             )}
