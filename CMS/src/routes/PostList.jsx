@@ -40,8 +40,16 @@ export default function PostList() {
     if (error) {
         return <p>{error}</p>
     }
+    if(posts.length < 1){
+        if(status === 'published'){
+            return <p>You haven't any post published yet</p>
+        }else{
+            return <p>All of your posts are published</p>
+        }
+    }
 
     return (
+        
         <ul className="post-list">
             {posts.map((post) =>
 
@@ -62,7 +70,6 @@ export default function PostList() {
                             <p>{post.date}</p>
                         </div>
                     </div>
-
                 </li>
 
 
