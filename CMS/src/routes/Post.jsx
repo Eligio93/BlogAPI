@@ -1,12 +1,14 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Form from "../../components/Form";
 import Loading from "../../components/Loading";
 
 export default function Post() {
-    const { postId } = useParams()
+    const { postId } = useParams();
+    const navigate=useNavigate();
     const [post, setPost] = useState();
+    const [success, setSuccess] = useState()
     const [error, setError] = useState();
     const [loading, setLoading] = useState(true);
 
@@ -67,13 +69,16 @@ export default function Post() {
     if (error) {
         return <p>{error}</p>
     }
+    if (success) {
+        return <p>{success}</p>
+    }
 
     return (
+
         <Form
             data={post}
             handleSubmit={handleSubmit}
             handleTextInput={handleTextInput}
-            handleFile={handleFile}
             handleCheckbox={handleCheckbox}
             handleEditor={handleEditor}
             disableField={true}
