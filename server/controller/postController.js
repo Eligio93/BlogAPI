@@ -40,6 +40,7 @@ exports.post_get = asyncHandler(async (req, res, next) => {
 exports.newPost_post = asyncHandler(async (req, res, next) => {
     // here you have req.body containing all datas and req.file containing the image
     try {
+        /*upload img on cloudinary*/
         let result = await cloudinary.uploader.upload(req.file.path);
         let imgUrl = result.secure_url
         const post = new Post({
@@ -59,7 +60,10 @@ exports.newPost_post = asyncHandler(async (req, res, next) => {
         res.json(err.message)
     }
 })
-/*PUT SPECIFIC POST*/
+
+
+
+/*EDIT SPECIFIC POST*/
 exports.editPost = [
     body('title')
         .trim()
@@ -83,16 +87,34 @@ exports.editPost = [
         const validationErrors = validationResult(req);
         if (validationErrors.isEmpty()) {
             try {
-                const postId= req.params.postId
-                const newPost = await Post.findByIdAndUpdate(postId, {title:req.body.title, body_text:req.body.body_text,published:req.body.published, featured:req.body.featured,description:req.body.description})
+                const postId = req.params.postId
+                const newPost = await Post.findByIdAndUpdate(postId, { title: req.body.title, body_text: req.body.body_text, published: req.body.published, featured: req.body.featured, description: req.body.description })
             } catch (err) {
                 return next(err)
             }
-            return res.json({message:'Post Updated'})
+            return res.json({ message: 'Post Updated' })
         } else {
             res.status(400).json({ message: validationErrors.errors[0].msg })
         }
     })
 
 
-] 
+]
+
+/*DELETE POST*/
+exports.deletePost = asyncHandler(async (req, res, next) => {
+    const postId = req.params.postId
+    /*process to get the imgPublicId to delete the Img from CLoudinary*/
+    const imgUrl = req.body.img
+    const lastSegment = imgUrl.split('/').pop();
+    const imgPublicId = lastSegment.split('.').slice(0, -1).join('.');
+    try {
+        /*delete img from cloudinary*/
+        await cloudinary.uploader.destroy(imgPublicId)
+        /*delete post from DB*/
+        await Post.findByIdAndDelete(postId)
+        return res.json({ message: 'Post Deleted' })
+    } catch (err) {
+        return res.status(400).json({ message: err })
+    }
+})
