@@ -19,6 +19,8 @@ router.post('/posts/newPost',/*passport.authenticate('jwt', { session: false }),
 
 /*EDIT POST*/
 router.put('/posts/edit/:postId',postController.editPost)
+/*DELETE POST*/
+router.delete('/posts/delete/:postId',postController.deletePost)
 
 /*POST comment*/
 router.post('/posts/:postId/comments/newComment',commentController.comment_post)
