@@ -6,7 +6,7 @@ import Loading from "../../components/Loading";
 
 export default function Post() {
     const { postId } = useParams();
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const [post, setPost] = useState();
     const [success, setSuccess] = useState()
     const [error, setError] = useState();
@@ -17,12 +17,15 @@ export default function Post() {
             try {
                 let result = await axios.get(`http://localhost:3000/blog/posts/${postId}`)
                 setPost(result.data)
-
+                setError()
             } catch (err) {
                 setError(err.response.data.message)
 
             } finally {
-                setLoading(false)
+                setTimeout(() => {
+                    setLoading(false)
+                }, 1000)
+
             }
         }
         getPost()
@@ -35,6 +38,7 @@ export default function Post() {
             let result = await axios.put(`http://localhost:3000/blog/posts/edit/${postId}`, post)
             if (result.status === 200) {
                 setSuccess(result.data.message)
+                setError()
                 setTimeout(() => {
                     navigate('/')
                 }, 2000)
@@ -45,6 +49,27 @@ export default function Post() {
             setLoading(false)
         }
 
+    }
+
+    async function handleDelete(e) {
+        e.preventDefault();
+        try {
+            let result = await axios.delete(`http://localhost:3000/blog/posts/delete/${postId}`, {data:post})
+            if (result.status === 200) {
+                setSuccess(result.data.message)
+                setError()
+                setTimeout(() => {
+                    navigate('/')
+                }, 2000)
+            }
+
+        } catch (err) {
+            setError(err)
+
+        } finally {
+            setLoading(false)
+
+        }
     }
     function handleTextInput(e) {
         const { name, value } = e.target;
@@ -74,14 +99,20 @@ export default function Post() {
     }
 
     return (
+        <>
+            <h2>Blog Post</h2>
+            <Form
+                data={post}
+                handleSubmit={handleSubmit}
+                handleDelete={handleDelete}
+                handleTextInput={handleTextInput}
+                handleCheckbox={handleCheckbox}
+                handleEditor={handleEditor}
+                disableField={true}
+                deleteBtn={true}
+            />
+        </>
 
-        <Form
-            data={post}
-            handleSubmit={handleSubmit}
-            handleTextInput={handleTextInput}
-            handleCheckbox={handleCheckbox}
-            handleEditor={handleEditor}
-            disableField={true}
-        />
+
     )
 }
