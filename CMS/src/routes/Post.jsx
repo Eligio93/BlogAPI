@@ -9,6 +9,7 @@ export default function Post() {
     const navigate = useNavigate();
     const [post, setPost] = useState();
     const [success, setSuccess] = useState()
+    const [commentDeleted, setCommentDeleted] = useState(false)
     const [error, setError] = useState();
     const [loading, setLoading] = useState(true);
 
@@ -30,7 +31,7 @@ export default function Post() {
         }
         getPost()
 
-    }, [postId])
+    }, [postId, commentDeleted])
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -54,7 +55,7 @@ export default function Post() {
     async function handleDelete(e) {
         e.preventDefault();
         try {
-            let result = await axios.delete(`http://localhost:3000/blog/posts/delete/${postId}`, {data:post})
+            let result = await axios.delete(`http://localhost:3000/blog/posts/delete/${postId}`, { data: post })
             if (result.status === 200) {
                 setSuccess(result.data.message)
                 setError()
@@ -87,6 +88,21 @@ export default function Post() {
             ...prevData, body_text: editorRef.getContent({ format: 'text' })
         }))
     }
+    async function handleDeleteComment(comment) {
+        setLoading(true);
+        try {
+            let result = await axios.delete(`http://localhost:3000/blog/posts/${postId}/comments/delete/${comment._id}`, { data: comment })
+            if (result.status === 200) {
+                //this makes the whole component to re render
+                setCommentDeleted(true)
+            }
+
+        } catch (err) {
+            setError(err.response.data.message)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     if (loading) {
         return <Loading />
@@ -111,6 +127,18 @@ export default function Post() {
                 disableField={true}
                 deleteBtn={true}
             />
+            <h2>Post Comments</h2>
+            {post.comments.length < 1 ? <p>This post has no comments</p> :
+                <ul>
+                    {post.comments.map((comment =>
+                        <li key={comment._id}>
+                            <p>{comment.message}</p>
+                            <button onClick={() => handleDeleteComment(comment)}>Delete</button>
+                        </li>
+                    ))}
+                </ul>
+            }
+
         </>
 
 
