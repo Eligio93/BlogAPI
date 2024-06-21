@@ -1,7 +1,9 @@
 const Post = require('../models/post')
+const Comment = require ('../models/comment')
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const post = require('../models/post');
 const cloudinary = require('cloudinary').v2
 require('dotenv').config()
 
@@ -15,7 +17,7 @@ cloudinary.config({
 
 /*GET all posts*/
 exports.posts = asyncHandler(async (req, res, next) => {
-    let posts = await Post.find({});
+    let posts = await Post.find({}).populate('comments');
     res.json(posts)
 })
 
@@ -108,9 +110,15 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
     const imgUrl = req.body.img
     const lastSegment = imgUrl.split('/').pop();
     const imgPublicId = lastSegment.split('.').slice(0, -1).join('.');
+    //comments related to that post need to be deleted too
     try {
         /*delete img from cloudinary*/
         await cloudinary.uploader.destroy(imgPublicId)
+        const postToDelete= await Post.findById(postId)
+        //delete comments associated with that post
+        if(postToDelete.comments.length > 0){
+            await Comment.deleteMany({_id:{$in:postToDelete.comments}})
+        }
         /*delete post from DB*/
         await Post.findByIdAndDelete(postId)
         return res.json({ message: 'Post Deleted' })
