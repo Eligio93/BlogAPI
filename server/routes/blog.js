@@ -5,9 +5,12 @@ const commentController = require ('../controller/commentController')
 const userController = require('../controller/userController');
 const passport = require('../passport-config');
 const multer = require('multer')
-// const storage= multer.memoryStorage()
 const upload = multer({dest: 'uploads/'})
 
+
+
+
+/*-----POST RELATED ROUTES -----*/
 /*Get All Posts*/
 router.get('/posts',postController.posts)
 
@@ -19,11 +22,17 @@ router.post('/posts/newPost',/*passport.authenticate('jwt', { session: false }),
 
 /*EDIT POST*/
 router.put('/posts/edit/:postId',postController.editPost)
+
 /*DELETE POST*/
 router.delete('/posts/delete/:postId',postController.deletePost)
 
+
+/*-----COMMENTS RELATED ROUTES-----*/
+
 /*POST comment*/
 router.post('/posts/:postId/comments/newComment',commentController.comment_post)
+/*DELETE comment*/
+router.delete('/posts/:postId/comments/delete/:commentId', commentController.comment_delete)
 
 
 
