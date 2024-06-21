@@ -34,3 +34,14 @@ exports.comment_post = [
     })
 
 ]
+/*DELETE a comment*/
+
+exports.comment_delete = asyncHandler(async(req,res,next)=>{
+    const commentId=req.params.commentId
+    try{
+        await Comment.findByIdAndDelete(commentId)
+        res.json({message:'Comment Deleted'})
+    }catch(err){
+        res.status(400).json({message:err})
+    }
+})
