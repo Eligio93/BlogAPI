@@ -92,12 +92,16 @@ export default function Post() {
         setLoading(true);
         try {
             let result = await axios.delete(`http://localhost:3000/blog/posts/${postId}/comments/delete/${comment._id}`, { data: comment })
+            console.log(result)
             if (result.status === 200) {
                 //this makes the whole component to re render
                 setCommentDeleted(true)
             }
-
         } catch (err) {
+            /*if the user is unathorized*/
+            if(err.response.status === 401){
+                navigate('/')
+            }
             setError(err.response.data.message)
         } finally {
             setLoading(false)
