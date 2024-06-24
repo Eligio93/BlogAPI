@@ -1,3 +1,21 @@
+import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+
 export default function Login(){
-    return <h1>Login</h1>
+    const [message,setMessage]=useState()
+    const location = useLocation()
+    useEffect(()=>{
+        if(location.state){
+            setMessage(location.state.message)
+        }
+    },[])
+    
+
+
+    return(
+        <>
+        <h1>Login</h1>
+        <p>{message}</p>
+        </>
+    ) 
 }
