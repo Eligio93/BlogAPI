@@ -100,7 +100,7 @@ export default function Post() {
         } catch (err) {
             /*if the user is unathorized*/
             if(err.response.status === 401){
-                navigate('/')
+                navigate('/login', {state:{message:'To delete a message you need to Login'}})
             }
             setError(err.response.data.message)
         } finally {
