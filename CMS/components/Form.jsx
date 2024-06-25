@@ -52,10 +52,10 @@ export default function Form({
                 <input type="checkbox" name="published" id="post-published" checked={data.published} onChange={handleCheckbox} />
             </label>
             <label htmlFor="post-featured">Featured?
-                <input type="checkbox" name="featured" id="post-featured" checked={data.featured} onChange={handleCheckbox} />
+                <input type="checkbox" name="featured" id="post-featured" checked={!data.published ? false : data.featured} disabled={!data.published} onChange={handleCheckbox} />
             </label>
             <button type='submit'>Send</button>
-            {deleteBtn && <button onClick={handleDelete}>Delete</button>}
+            {deleteBtn && <button onClick={handleDelete}>Delete Post</button>}
         </form>
 
     )
