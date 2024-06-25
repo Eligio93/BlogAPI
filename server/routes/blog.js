@@ -32,7 +32,7 @@ router.delete('/posts/delete/:postId',postController.deletePost)
 /*POST comment*/
 router.post('/posts/:postId/comments/newComment',commentController.comment_post)
 /*DELETE comment*/
-router.delete('/posts/:postId/comments/delete/:commentId', commentController.comment_delete)
+router.delete('/posts/:postId/comments/delete/:commentId',passport.authenticate('jwt', { session: false }), commentController.comment_delete)
 
 
 
