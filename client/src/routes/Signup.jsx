@@ -8,7 +8,7 @@ import signUpImg from '../img/signupImg.jpg'
 
 
 export default function Signup() {
-    const { user, setUSer,logOut } = useContext(AuthContext)
+    const { user, setUSer, logOut } = useContext(AuthContext)
     //hook to redirect the user after signup
     const navigate = useNavigate()
     const [data, setData] = useState({
@@ -16,7 +16,6 @@ export default function Signup() {
         lastName: '',
         email: '',
         password: '',
-        is_pro: true,
         admin: true
     })
     const [fetchingError, setFetchingError] = useState()
@@ -38,18 +37,26 @@ export default function Signup() {
                 setServerResponse(response.data.message)
                 //show the successful creating for 2 seconds than redirect to home
                 setTimeout(() => {
-                    navigate('/')
-                }, 2000)
+                    navigate('/login')
+                }, 1000)
             }
         } catch (err) {
             setFetchingError(err.response.data.message)
         }
     }
+
+    function handleCheckbox(e) {
+        setData(prevData => ({
+            ...prevData,
+            admin: e.target.checked
+        }));
+
+    }
     return (
         <div className="signUp">
             <img src={signUpImg} alt="" />
             {user ? (
-            <p>You are already logged as {user.name}. <Link to='/' onClick={logOut}>LogOut</Link> to register a new Account</p>) : (
+                <p>You are already logged as {user.name}. <Link to='/' onClick={logOut}>LogOut</Link> to register a new Account</p>) : (
                 <form className="form" onSubmit={handleSubmit}>
                     {fetchingError && <p className="error-msg">{fetchingError}</p>}
                     {serverResponse && <p className="success-msg">{serverResponse}</p>}
@@ -69,6 +76,10 @@ export default function Signup() {
                     <label htmlFor="su-password">Password:
                     </label>
                     <input type="password" name="password" id="su-password" value={data.password} onChange={handleChange} autoComplete="on" required minLength={6} />
+
+                    <label htmlFor="su-admin">Admin:
+                    </label>
+                    <input type="checkbox" name="admin" id='su-admin' checked={data.admin} onChange={handleCheckbox} />
 
                     <button type="submit" className="signup-btn">Sign up</button>
                 </form>)}
