@@ -32,6 +32,7 @@ export default function Login() {
             navigate('/')
 
         } catch (err) {
+            console.log(err)
             setError(err.response.data.message)
         }
     }
@@ -39,21 +40,27 @@ export default function Login() {
         setData({ email: 'guest@guest.com', password: 'guestguest' })
         // handleLogin()
     }
+    function handleChange(e) {
+        const { name, value } = e.target;
+        setData((prevData) => ({
+            ...prevData, [name]: value
+        }))
+    }
 
 
-    console.log(data)
     return (
         <>
             <h1>Login</h1>
             {message && <p>{message}</p>}
+            {error && <p>{error}</p> }
             <form onSubmit={handleLogin}>
-                <label htmlFor="username">User Name
+                <label htmlFor="cms-email">Email
                 </label>
-                <input type="text" />
-                <label htmlFor="password">Password
+                <input type="text" name="email" id='cms-email' autoComplete="true" value={data.email} onChange={handleChange} />
+                <label htmlFor="cms-password">Password
                 </label>
-                <input type="password" />
-                <button >Login</button>
+                <input type="password" name='password' id='cms-password' value={data.password} onChange={handleChange}/>
+                <button type='submit'>Login</button>
                 <button onClick={handleGuestLogin}>Guest Login</button>
             </form>
         </>
