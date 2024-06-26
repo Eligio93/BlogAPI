@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Form from "../../components/Form";
 import Loading from "../../components/Loading";
+import { useContext } from "react";
+import { AuthContext } from "../../components/AuthContext";
 
 export default function Post() {
     const { postId } = useParams();
+    const{jwt} = useContext(AuthContext)
     const navigate = useNavigate();
     const [post, setPost] = useState();
     const [success, setSuccess] = useState()
@@ -91,7 +94,7 @@ export default function Post() {
     async function handleDeleteComment(comment) {
         setLoading(true);
         try {
-            let result = await axios.delete(`http://localhost:3000/blog/posts/${postId}/comments/delete/${comment._id}`, { data: comment })
+            let result = await axios.delete(`http://localhost:3000/blog/posts/${postId}/comments/delete/${comment._id}`, { data: comment, headers: { Authorization: `Bearer ${jwt}` } })
             console.log(result)
             if (result.status === 200) {
                 //this makes the whole component to re render
@@ -100,7 +103,7 @@ export default function Post() {
         } catch (err) {
             /*if the user is unathorized*/
             if(err.response.status === 401){
-                navigate('/login', {state:{message:'To delete a message you need to Login'}})
+                navigate('/login', {state:{message:'To delete a comment you need to Login'}})
             }
             setError(err.response.data.message)
         } finally {
