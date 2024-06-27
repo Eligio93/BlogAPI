@@ -8,13 +8,14 @@ import { AuthContext } from "../../components/AuthContext";
 
 export default function Post() {
     const { postId } = useParams();
-    const{jwt,user} = useContext(AuthContext)
+    const { jwt, user } = useContext(AuthContext)
     const navigate = useNavigate();
     const [post, setPost] = useState();
     const [success, setSuccess] = useState()
     const [commentDeleted, setCommentDeleted] = useState(false)
     const [error, setError] = useState();
     const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         if (!user) {
@@ -46,7 +47,8 @@ export default function Post() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            let result = await axios.put(`http://localhost:3000/blog/posts/edit/${postId}`, post)
+            let result = await axios.put(`http://localhost:3000/blog/posts/edit/${postId}`, post, { headers: { Authorization: `Bearer ${jwt}` } })
+            console.log(result)
             if (result.status === 200) {
                 setSuccess(result.data.message)
                 setError()
@@ -65,7 +67,7 @@ export default function Post() {
     async function handleDelete(e) {
         e.preventDefault();
         try {
-            let result = await axios.delete(`http://localhost:3000/blog/posts/delete/${postId}`, { data: post })
+            let result = await axios.delete(`http://localhost:3000/blog/posts/delete/${postId}`, { data: post, headers: { Authorization: `Bearer ${jwt}` } })
             if (result.status === 200) {
                 setSuccess(result.data.message)
                 setError()
@@ -109,8 +111,8 @@ export default function Post() {
             }
         } catch (err) {
             /*if the user is unathorized*/
-            if(err.response.status === 401){
-                navigate('/login', {state:{message:'To delete a comment you need to Login'}})
+            if (err.response.status === 401) {
+                navigate('/login', { state: { message: 'To delete a comment you need to Login' } })
             }
             setError(err.response.data.message)
         } finally {
