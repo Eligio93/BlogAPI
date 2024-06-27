@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import axios from 'axios'
 import { useContext } from 'react';
 import { AuthContext } from '../../components/AuthContext';
@@ -23,6 +23,13 @@ export default function NewPost() {
         published: true,
         featured: false
     });
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/login', { state: { message: 'You need to be logged in to see the content' } })
+        }
+
+    })
 
     //handle the loading file
     function handleFile(e) {

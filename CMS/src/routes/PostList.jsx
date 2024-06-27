@@ -1,17 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import userIcon from '../img/userIcon.svg'
 import commentIcon from '../img/commentIcon.svg'
 import calendarIcon from '../img/calendarIcon.svg'
 import Loading from "../../components/Loading";
+import { AuthContext } from "../../components/AuthContext";
 
 export default function PostList() {
     const navigate = useNavigate()
     const { status } = useParams();
+    const {user}= useContext(AuthContext)
     const [posts, setPosts] = useState();
     const [error, setError] = useState();
     const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/login', { state: { message: 'You need to be logged in to see the content' } })
+        }
+
+    })
 
     useEffect(() => {
         async function getPosts() {

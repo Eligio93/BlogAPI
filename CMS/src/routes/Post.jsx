@@ -8,13 +8,20 @@ import { AuthContext } from "../../components/AuthContext";
 
 export default function Post() {
     const { postId } = useParams();
-    const{jwt} = useContext(AuthContext)
+    const{jwt,user} = useContext(AuthContext)
     const navigate = useNavigate();
     const [post, setPost] = useState();
     const [success, setSuccess] = useState()
     const [commentDeleted, setCommentDeleted] = useState(false)
     const [error, setError] = useState();
     const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/login', { state: { message: 'You need to be logged in to see the content' } })
+        }
+
+    })
 
     useEffect(() => {
         async function getPost() {
