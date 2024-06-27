@@ -9,7 +9,7 @@ import Loading from '../../components/Loading';
 
 
 export default function NewPost() {
-    const { user } = useContext(AuthContext);
+    const { user,jwt} = useContext(AuthContext);
     const navigate = useNavigate();
     const [success, setSuccess] = useState();
     const [error, setError] = useState();
@@ -50,7 +50,7 @@ export default function NewPost() {
         formData.append('published', data.published)
         formData.append('featured', data.featured)
         try {
-            let result = await axios.post('http://localhost:3000/blog/posts/newPost', formData)
+            let result = await axios.post('http://localhost:3000/blog/posts/newPost', formData ,{ headers: { Authorization: `Bearer ${jwt}` } })
             if (result.status === 200) {
                 setSuccess(result.data.message)
                 setTimeout(() => {

@@ -12,7 +12,8 @@ function Post() {
     const [error, setError] = useState();
     const [loading, setLoading] = useState(true);
     let { postId } = useParams();
-    const { user } = useContext(AuthContext);
+    const { user ,jwt } = useContext(AuthContext);
+    
 
     //Get the post with postId
     useEffect(() => {
@@ -35,7 +36,7 @@ function Post() {
     async function handleComment(e, message) {
         e.preventDefault();
         try {
-            let result = await axios.post(`http://localhost:3000/blog/posts/${postId}/comments/newComment`, { user, postId, message })
+            let result = await axios.post(`http://localhost:3000/blog/posts/${postId}/comments/newComment`, {user, postId, message}, {headers: { Authorization: `Bearer ${jwt}` } })
             if (result.status == 200) {
                 //result.data is the actual comment
                 setComments((prev) => [...prev, result.data])
