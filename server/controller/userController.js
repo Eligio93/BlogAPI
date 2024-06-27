@@ -4,6 +4,7 @@ const passport = require('../passport-config')
 const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+require('dotenv').config();
 
 
 
@@ -36,16 +37,16 @@ exports.login_post = [
 
                 /*if the login comes from client*/
                 if (user) {
-                    if (req.headers.origin === 'http://localhost:5174') {
-                        jwt.sign({ id: user._id }, 'secret', (err, token) => {
+                    if (req.headers.origin === 'http://localhost:5173') {
+                        jwt.sign({ id: user._id }, process.env.JWT_SECRET, (err, token) => {
                             if (err) {
                                 next(err)
                             }
                             res.json({ token, user })
                         })
                         /*if the login comes from CMS*/
-                    } else if (req.headers.origin === 'http://localhost:5173' && user.admin) {
-                        jwt.sign({ id: user._id }, 'secret', (err, token) => {
+                    } else if (req.headers.origin === 'http://localhost:5174' && user.admin) {
+                        jwt.sign({ id: user._id }, process.env.JWT_SECRET, (err, token) => {
                             if (err) {
                                 next(err)
                             }
