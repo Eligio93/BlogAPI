@@ -17,20 +17,20 @@ router.get('/posts',postController.posts)
 /*GET Specific post*/
 router.get('/posts/:postId',postController.post_get);
 
-/*POST new Post *PROTECTED* */
-router.post('/posts/newPost',/*passport.authenticate('jwt', { session: false }),*/upload.single('img'),postController.newPost_post)
+/*POST new Post *PROTECTED* */ 
+router.post('/posts/newPost',passport.authenticate('jwt', { session: false }),upload.single('img'),postController.newPost_post)
 
-/*EDIT POST*/
-router.put('/posts/edit/:postId',postController.editPost)
+/*EDIT POST *PROTECTED* */
+router.put('/posts/edit/:postId',passport.authenticate('jwt', { session: false }),postController.editPost)
 
-/*DELETE POST*/
-router.delete('/posts/delete/:postId',postController.deletePost)
+/*DELETE POST *PROTECTED* */
+router.delete('/posts/delete/:postId',passport.authenticate('jwt', { session: false }),postController.deletePost)
 
 
 /*-----COMMENTS RELATED ROUTES-----*/
 
 /*POST comment*/
-router.post('/posts/:postId/comments/newComment',commentController.comment_post)
+router.post('/posts/:postId/comments/newComment',passport.authenticate('jwt', { session: false }),commentController.comment_post)
 /*DELETE comment*/
 router.delete('/posts/:postId/comments/delete/:commentId',passport.authenticate('jwt', { session: false }), commentController.comment_delete)
 
