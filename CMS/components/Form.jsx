@@ -10,7 +10,8 @@ export default function Form({
     disableField,
     handleEditor,
     deleteBtn,
-    handleDelete }) {
+    handleDelete,
+    btnName }) {
     const editorRef = useRef(null);
     return (
         <form encType='multipart/form-data' className='form' onSubmit={handleSubmit}>
@@ -54,8 +55,8 @@ export default function Form({
             <label htmlFor="post-featured">Featured?
                 <input type="checkbox" name="featured" id="post-featured" checked={!data.published ? false : data.featured} disabled={!data.published} onChange={handleCheckbox} />
             </label>
-            <button type='submit'>Send</button>
-            {deleteBtn && <button onClick={handleDelete}>Delete Post</button>}
+            <button type='submit' className='green-btn'>{btnName}</button>
+            {deleteBtn && <button onClick={handleDelete} className='red-btn'>Delete Post</button>}
         </form>
 
     )
