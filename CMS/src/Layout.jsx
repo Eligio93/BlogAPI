@@ -8,7 +8,7 @@ export default function Layout() {
 
     return (
         <>
-            <div className="sidebar">
+            <nav className="sidebar">
                 <ul>
                     <li>
                         <Link to='/'>Home</Link>
@@ -25,11 +25,11 @@ export default function Layout() {
                     <li>
                         <Link to='/newPost'>Add New Post</Link>
                     </li>
-                    {user && <li>
+                    {user && <li className="logout-btn">
                         <Link onClick={logOut} >LogOut</Link>
                     </li>}
                 </ul>
-            </div>
+            </nav>
             <div className="content">
                 <Outlet />
             </div>
