@@ -142,6 +142,7 @@ export default function Post() {
                 handleEditor={handleEditor}
                 disableField={true}
                 deleteBtn={true}
+                btnName={'Edit Post'}
             />
             <h2>Post Comments</h2>
             {post.comments.length < 1 ? <p>This post has no comments</p> :
@@ -149,7 +150,7 @@ export default function Post() {
                     {post.comments.map((comment =>
                         <li key={comment._id}>
                             <p>{comment.message}</p>
-                            <button onClick={() => handleDeleteComment(comment)}>Delete</button>
+                            <button className="red-btn" onClick={() => handleDeleteComment(comment)}>Delete</button>
                         </li>
                     ))}
                 </ul>

@@ -1,11 +1,13 @@
 :root{
   --light-red:#db6367;
   --dark-red:#B8494C;
-  --green:#A2BD3B;
+  --light-green:#abda7f;
+  --dark-green:#82b652;
   --yellow:#E9C453;
   --light-grey:#D7E0E0;
   --dark-grey:#aaafaf;
   --dark-blue:#062A40;
+  --light-blue:#083c5c;
 
 }
 
@@ -62,6 +64,33 @@ body{
 /*STYLE CONTENT*/
 .content{
   flex:1;
+  padding:20px
+}
+
+
+/*STYLE FORM*/
+.red-btn{
+  color:white;
+  background-color: var(--light-red);
+  border:none;
+  padding:5px;
+  border-radius: 5px;;
+}
+.red-btn:hover{
+  background-color: var(--dark-red);
+  cursor:pointer;
+}
+
+.green-btn{
+  color:black;
+  background-color: var(--light-green);
+  border:none;
+  padding:5px;
+  border-radius: 5px;;
+}
+.green-btn:hover{
+  background-color: var(--dark-green);
+  cursor:pointer;
 }
 
 .form{
@@ -76,18 +105,20 @@ body{
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  gap: 20px;;
+  gap: 20px;
 }
 .listed-post{
-  border:1px solid purple;
+  color:black;
   padding: 10px;
   display: flex;
   flex-direction: column;
   gap:10px;
   border-radius: 10px;
+  background-color: var(--light-grey);
 }
 .listed-post:hover{
   cursor: pointer;
+  background-color: var(--dark-grey);
 }
 .listed-post-info{
   display: flex;

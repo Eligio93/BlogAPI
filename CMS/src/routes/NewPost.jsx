@@ -102,6 +102,7 @@ export default function NewPost() {
                     data={data}
                     disableField={false}
                     deleteBtn={false}
+                    btnName={'Create Post'}
                 />
                 </>
             )}
