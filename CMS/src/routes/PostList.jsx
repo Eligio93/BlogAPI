@@ -59,7 +59,7 @@ export default function PostList() {
 
     return (
         <>
-            <h2>{status && status + ' posts'}</h2>
+            <h2>{status ? (status + ' posts') : ('Posts')}</h2>
             <ul className="post-list">
                 {posts.map((post) =>
 
