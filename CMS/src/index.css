@@ -69,37 +69,27 @@ body{
 
 
 /*STYLE FORM*/
-.red-btn{
-  color:white;
-  background-color: var(--light-red);
-  border:none;
-  padding:5px;
-  border-radius: 5px;;
-}
-.red-btn:hover{
-  background-color: var(--dark-red);
-  cursor:pointer;
-}
-
-.green-btn{
-  color:black;
-  background-color: var(--light-green);
-  border:none;
-  padding:5px;
-  border-radius: 5px;;
-}
-.green-btn:hover{
-  background-color: var(--dark-green);
-  cursor:pointer;
-}
 
 .form{
   display:flex;
   flex-direction: column;
+  gap:10px;
+  border-radius:5px;
+  padding:10px;
+  background-color: var(--light-grey);
 }
 .form label{
   display:flex;
   flex-direction: column;
+  font-weight: bold;
+  gap:5px;
+}
+.form textarea{
+  height: 100px;
+  resize: none;
+}
+.form input, .form textarea{
+  padding:5px;
 }
 .post-list{
   list-style-type: none;
@@ -132,6 +122,30 @@ body{
   display:flex;
   gap:5px;
 }
+.red-btn{
+  color:white;
+  background-color: var(--light-red);
+  border:none;
+  padding:5px;
+  border-radius: 5px;;
+}
+.red-btn:hover{
+  background-color: var(--dark-red);
+  cursor:pointer;
+}
+
+.green-btn{
+  color:black;
+  background-color: var(--light-green);
+  border:none;
+  padding:5px;
+  border-radius: 5px;;
+}
+.green-btn:hover{
+  background-color: var(--dark-green);
+  cursor:pointer;
+}
+
 
 /*-----LOADING-----*/
 .loading{
