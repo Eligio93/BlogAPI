@@ -19,7 +19,7 @@ export default function NewPost() {
         title: '',
         description: '',
         body: '',
-        author: 'Eligio',
+        author: user.name + user.lastName,
         published: true,
         featured: false
     });
