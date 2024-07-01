@@ -5,6 +5,7 @@ import userAvatar from '../img/userAvatar.svg'
 import { AuthContext } from "../../components/AuthContext"
 import CommentBox from "../../components/CommentBox"
 import Loading from "../../components/Loading"
+import {format} from "date-fns"
 
 function Post() {
     const [post, setPost] = useState()
@@ -61,7 +62,7 @@ function Post() {
                 <img src={userAvatar} alt="" />
                 <div className="post-author">
                     <p>{'Article written by ' + post.author}</p>
-                    <p>{post.date}</p>
+                    <p>{format((post.date), 'dd MMM yyyy')}</p>
                 </div>
             </div>
             <img src={post.img} alt="" />
