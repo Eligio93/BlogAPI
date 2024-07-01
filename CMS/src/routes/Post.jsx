@@ -46,9 +46,9 @@ export default function Post() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setLoading(true);
         try {
             let result = await axios.put(`http://localhost:3000/blog/posts/edit/${postId}`, post, { headers: { Authorization: `Bearer ${jwt}` } })
-            console.log(result)
             if (result.status === 200) {
                 setSuccess(result.data.message)
                 setError()
@@ -107,7 +107,7 @@ export default function Post() {
             console.log(result)
             if (result.status === 200) {
                 //this makes the whole component to re render
-                setCommentDeleted(true)
+                setCommentDeleted(!commentDeleted)
             }
         } catch (err) {
             /*if the user is unathorized*/
@@ -146,10 +146,14 @@ export default function Post() {
             />
             <h2>Post Comments</h2>
             {post.comments.length < 1 ? <p>This post has no comments</p> :
-                <ul>
+                <ul className="comment-list">
                     {post.comments.map((comment =>
-                        <li key={comment._id}>
+                        <li key={comment._id} className="comment">
+                            <div className="comment-info">
+                            <p>{comment.author.name +' says:'}</p>
                             <p>{comment.message}</p>
+                            </div>
+                         
                             <button className="red-btn" onClick={() => handleDeleteComment(comment)}>Delete</button>
                         </li>
                     ))}
