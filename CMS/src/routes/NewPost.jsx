@@ -19,7 +19,7 @@ export default function NewPost() {
         title: '',
         description: '',
         body: '',
-        author: user.name + user.lastName,
+        author: user.name +' '+user.lastName,
         published: true,
         featured: false
     });
@@ -90,9 +90,10 @@ export default function NewPost() {
     }
     return (
         <>
-            {success ? (<p>{success}</p>) : (
+            {success ? (<p className='green-btn'>{success}</p>) : (
                 <>
-                {error && <p>{error}</p>}
+                {error && <p className='error-msg'>{error}</p>}
+                <h2>Add New Post</h2>
                 <Form
                     handleSubmit={handleSubmit}
                     handleTextInput={handleTextInput}
