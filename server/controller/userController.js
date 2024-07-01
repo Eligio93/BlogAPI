@@ -42,7 +42,7 @@ exports.login_post = [
                             if (err) {
                                 next(err)
                             }
-                            res.json({ token, user })
+                            return res.json({ token, user })
                         })
                         /*if the login comes from CMS*/
                     } else if (req.headers.origin === 'http://localhost:5174' && user.admin) {
@@ -50,7 +50,7 @@ exports.login_post = [
                             if (err) {
                                 next(err)
                             }
-                            res.json({ token, user })
+                            return res.json({ token, user })
                         })
                     } else {
                         res.status(401).json({ message: "The User doesn't have enough privileges" })
