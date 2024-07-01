@@ -49,20 +49,20 @@ export default function Login() {
 
 
     return (
-        <>
+        <div className="login-area">
             <h1>Login</h1>
             {message && <p>{message}</p>}
-            {error && <p>{error}</p> }
-            <form onSubmit={handleLogin}>
+            {error && <p className="error-msg">{error}</p> }
+            <form onSubmit={handleLogin} className="form">
                 <label htmlFor="cms-email">Email
                 </label>
                 <input type="text" name="email" id='cms-email' autoComplete="true" value={data.email} onChange={handleChange} />
                 <label htmlFor="cms-password">Password
                 </label>
                 <input type="password" name='password' id='cms-password' value={data.password} onChange={handleChange}/>
-                <button type='submit'>Login</button>
-                <button onClick={handleGuestLogin}>Guest Login</button>
+                <button type='submit' className="yellow-btn">Login</button>
+                <button onClick={handleGuestLogin} className="yellow-btn">Guest Login</button>
             </form>
-        </>
+        </div>
     )
 }

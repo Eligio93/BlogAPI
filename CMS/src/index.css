@@ -3,7 +3,8 @@
   --dark-red:#B8494C;
   --light-green:#abda7f;
   --dark-green:#82b652;
-  --yellow:#E9C453;
+  --dark-yellow:#E9C453;
+  --light-yellow:#ecc95e;
   --light-grey:#D7E0E0;
   --dark-grey:#aaafaf;
   --dark-blue:#062A40;
@@ -66,6 +67,16 @@ body{
   flex:1;
   padding:20px
 }
+.content h2{
+  margin-bottom:10px;
+  background-color: var(--dark-blue);
+  color:white;
+  padding:5px;
+  border-radius: 5px;;
+}
+.content h2::first-letter{
+  text-transform: uppercase;
+}
 
 
 /*STYLE FORM*/
@@ -77,6 +88,7 @@ body{
   border-radius:5px;
   padding:10px;
   background-color: var(--light-grey);
+  margin-bottom:10px;
 }
 .form label{
   display:flex;
@@ -91,6 +103,15 @@ body{
 .form input, .form textarea{
   padding:5px;
 }
+
+/*STYLE LOGIN*/
+.login-area{
+  width:100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
 .post-list{
   list-style-type: none;
   display: flex;
@@ -144,6 +165,20 @@ body{
 .green-btn:hover{
   background-color: var(--dark-green);
   cursor:pointer;
+}
+.yellow-btn{
+  background-color: var(--light-yellow);
+  border:none;
+  padding:5px;
+  border-radius: 5px;;
+
+}
+.yellow-btn:hover{
+  background-color: var(--dark-yellow);
+  cursor:pointer;
+}
+.error-msg{
+  color:red;
 }
 
 
