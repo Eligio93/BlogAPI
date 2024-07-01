@@ -6,6 +6,7 @@ import commentIcon from '../img/commentIcon.svg'
 import calendarIcon from '../img/calendarIcon.svg'
 import Loading from "../../components/Loading";
 import { AuthContext } from "../../components/AuthContext";
+import {format} from "date-fns"
 
 export default function PostList() {
     const navigate = useNavigate()
@@ -62,10 +63,8 @@ export default function PostList() {
             <h2>{status ? (status + ' posts') : ('Posts')}</h2>
             <ul className="post-list">
                 {posts.map((post) =>
-
                     <li key={post._id} className="listed-post" onClick={() => navigate(`/posts/${post._id}`)}>
-
-                        <h2>{post.title}</h2>
+                        <h3>{post.title}</h3>
                         <div className="listed-post-info">
                             <div className="listed-post-author">
                                 <img src={userIcon} alt="" />
@@ -77,7 +76,7 @@ export default function PostList() {
                             </div>
                             <div className="listed-post-date">
                                 <img src={calendarIcon} alt="" />
-                                <p>{post.date}</p>
+                                <p>{format((post.date),'dd MMM yyyy')}</p>
                             </div>
                         </div>
                     </li>
