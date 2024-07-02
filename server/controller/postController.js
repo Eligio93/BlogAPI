@@ -1,5 +1,5 @@
 const Post = require('../models/post')
-const Comment = require ('../models/comment')
+const Comment = require('../models/comment')
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
@@ -17,7 +17,7 @@ cloudinary.config({
 
 /*GET all posts*/
 exports.posts = asyncHandler(async (req, res, next) => {
-    let posts = await Post.find({}).populate('comments');
+    let posts = await Post.find({}).populate('comments').populate('author');
     res.json(posts)
 })
 
@@ -29,7 +29,7 @@ exports.post_get = asyncHandler(async (req, res, next) => {
         populate: {
             path: 'author'
         }
-    })
+    }).populate('author')
     if (post) {
         res.json(post)
     } else {
@@ -39,29 +39,59 @@ exports.post_get = asyncHandler(async (req, res, next) => {
 })
 
 /*POST new post*/
-exports.newPost_post = asyncHandler(async (req, res, next) => {
-    // here you have req.body containing all datas and req.file containing the image
-    try {
-        /*upload img on cloudinary*/
-        let result = await cloudinary.uploader.upload(req.file.path);
-        let imgUrl = result.secure_url
-        const post = new Post({
-            title: req.body.title,
-            date: new Date(),
-            description: req.body.description,
-            body_text: req.body.body,
-            comments: [],
-            author: req.body.author,
-            published: req.body.published,
-            featured: req.body.featured,
-            img: imgUrl
-        })
-        await post.save()
-        res.json({ message: 'Post Created' })
-    } catch (err) {
-        res.json(err.message)
-    }
-})
+exports.newPost_post = [
+    //sanitizing data
+    body('title', 'Title must not be empty')
+        .trim()
+        .notEmpty()
+        .escape(),
+    body('description', 'Description must not be empty')
+        .trim()
+        .notEmpty()
+        .escape(),
+    body('published')
+        .isBoolean()
+        .escape(),
+    body('featured')
+        .isBoolean()
+        .escape(),
+    body('body')
+        .trim()
+        .notEmpty()
+        .escape(),
+    asyncHandler(async (req, res, next) => {
+        // here you have req.body containing all datas and req.file containing the image
+        const validationErrors = validationResult(req);
+        console.log(validationErrors)
+        if (validationErrors.isEmpty()) {
+            try {
+                /*upload img on cloudinary*/
+                let result = await cloudinary.uploader.upload(req.file.path);
+                let imgUrl = result.secure_url
+                const post = new Post({
+                    title: req.body.title,
+                    date: new Date(),
+                    description: req.body.description,
+                    body_text: req.body.body,
+                    comments: [],
+                    author: JSON.parse(req.body.author),
+                    published: req.body.published,
+                    featured: req.body.featured,
+                    img: imgUrl
+                })
+                await post.save()
+                res.json({ message: 'Post Created' })
+            } catch (err) {
+                console.log(err)
+                res.json(err.message)
+            }
+        } else {
+            res.status(400).json({ message: validationErrors.errors[0].msg })
+        }
+    })
+
+
+]
 
 
 
@@ -114,10 +144,10 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
     try {
         /*delete img from cloudinary*/
         await cloudinary.uploader.destroy(imgPublicId)
-        const postToDelete= await Post.findById(postId)
+        const postToDelete = await Post.findById(postId)
         //delete comments associated with that post
-        if(postToDelete.comments.length > 0){
-            await Comment.deleteMany({_id:{$in:postToDelete.comments}})
+        if (postToDelete.comments.length > 0) {
+            await Comment.deleteMany({ _id: { $in: postToDelete.comments } })
         }
         /*delete post from DB*/
         await Post.findByIdAndDelete(postId)
