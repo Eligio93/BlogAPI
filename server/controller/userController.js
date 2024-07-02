@@ -45,7 +45,7 @@ exports.login_post = [
                             return res.json({ token, user })
                         })
                         /*if the login comes from CMS*/
-                    } else if (req.headers.origin === 'http://localhost:5174' && user.admin) {
+                    } else if (req.headers.origin === process.env.CMS_URL && user.admin) {
                         jwt.sign({ id: user._id }, process.env.JWT_SECRET, (err, token) => {
                             if (err) {
                                 next(err)
