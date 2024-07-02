@@ -29,6 +29,7 @@ export default function CommentBox({ comments, user, handleComment }) {
             ) : (
                 <p>There's no comments for this post</p>
             )}
+            {/*in case the user is logged*/}
             {user &&
                 <form onSubmit={(e) => { handleComment(e, message); setMessage('') }}>
                     <textarea name="comment-input" id="comment-input" onChange={handleMessage} value={message} required></textarea>

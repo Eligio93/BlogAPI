@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Home from './routes/Home.jsx'
 import Layout from './Layout.jsx'
 import Login from './routes/Login.jsx'
@@ -9,6 +9,7 @@ import NewPost from './routes/NewPost.jsx'
 import { AuthProvider } from '../components/AuthContext.jsx'
 import PostList from './routes/PostList.jsx'
 import Post from './routes/Post.jsx'
+
 
 
 const router = createBrowserRouter([
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  
 
   <React.StrictMode>
     <AuthProvider>

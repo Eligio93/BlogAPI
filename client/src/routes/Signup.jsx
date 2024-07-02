@@ -28,11 +28,12 @@ export default function Signup() {
             ...prevData, [name]: value
         }))
     }
+    //handle submit signup form
     async function handleSubmit(e) {
         e.preventDefault(e);
         try {
             //fetch data to server and get the response in json
-            const response = await axios.post('http://localhost:3000/user/signup', data)
+            const response = await axios.post(`${import.meta.env.VITE_SERVER_BASEURL}/user/signup`, data)
             if (response.status === 200) {
                 setServerResponse(response.data.message)
                 //show the successful creating for 2 seconds than redirect to home
@@ -44,7 +45,7 @@ export default function Signup() {
             setFetchingError(err.response.data.message)
         }
     }
-
+    //handle checkbox to change admin status
     function handleCheckbox(e) {
         setData(prevData => ({
             ...prevData,

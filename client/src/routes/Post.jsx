@@ -16,11 +16,11 @@ function Post() {
     const { user ,jwt } = useContext(AuthContext);
     
 
-    //Get the post with postId
+    //Get the single post with postId
     useEffect(() => {
         async function getPost() {
             try {
-                let result = await axios.get(`http://localhost:3000/blog/posts/${postId}`)
+                let result = await axios.get(`${import.meta.env.VITE_SERVER_BASEURL}/blog/posts/${postId}`)
                 setComments(result.data.comments)
                 setPost(result.data)
             } catch (err) {
@@ -37,7 +37,7 @@ function Post() {
     async function handleComment(e, message) {
         e.preventDefault();
         try {
-            let result = await axios.post(`http://localhost:3000/blog/posts/${postId}/comments/newComment`, {user, postId, message}, {headers: { Authorization: `Bearer ${jwt}` } })
+            let result = await axios.post(`${import.meta.env.VITE_SERVER_BASEURL}/blog/posts/${postId}/comments/newComment`, {user, postId, message}, {headers: { Authorization: `Bearer ${jwt}` } })
             if (result.status == 200) {
                 //result.data is the actual comment
                 setComments((prev) => [...prev, result.data])

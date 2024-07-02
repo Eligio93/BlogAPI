@@ -12,20 +12,20 @@ export default function Blog() {
     const [error, setError] = useState();
     const { user } = useContext(AuthContext)
 
-    //insert error variable and loading icon in the finally
+    //Get all blog posts published and featured
     useEffect(() => {
         async function getPosts() {
             try {
-                let results = await axios.get('http://localhost:3000/blog/posts')
-                setPosts(results.data.filter((post)=>post.published))
+                let results = await axios.get(`${import.meta.env.VITE_SERVER_BASEURL}/blog/posts`)
+                setPosts(results.data.filter((post) => post.published))
                 setFeaturedPosts(results.data.filter((post) => post.featured))
             } catch (err) {
                 setError(err.message)
             } finally {
-                setTimeout(()=>{
+                setTimeout(() => {
                     setLoading(false)
-                },1000)
-               
+                }, 1000)
+
             }
         }
         getPosts()

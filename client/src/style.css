@@ -347,7 +347,7 @@ header a {
 
 }
 
-/*-----SIGNUP Page -----*/
+/*-----SIGNUP/LOGIN Page -----*/
 .signUp,
 .login {
     display: flex;
@@ -360,6 +360,8 @@ header a {
     height: 100%;
     padding: 30px;
 }
+
+/*-----STYLE FORM-----*/
 
 .form {
     display: flex;

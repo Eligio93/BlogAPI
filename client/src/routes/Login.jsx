@@ -21,11 +21,10 @@ export default function Login() {
         e.preventDefault(e);
         try {
             //fetch data to server and get the response in json
-            const response = await axios.post('http://localhost:3000/user/login', data)
+            const response = await axios.post(`${import.meta.env.VITE_SERVER_BASEURL}/user/login`, data)
             let token = response.data.token
             localStorage.setItem('token', token)
             setJwt(token)
-            console.log(response.data.user)
             setUser(response.data.user)
             setError()
             /* -1 brings back the user to the page where he was before to login*/

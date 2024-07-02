@@ -12,9 +12,10 @@ function Header() {
     const { user, setUser, logOut } = useContext(AuthContext);
     const [mobileMenu, setMobileMenu] = useState(false)
     const location = useLocation()
-    useEffect(()=>{
+    /*closes the hamburger menu in case the location changes*/
+    useEffect(() => {
         setMobileMenu(false)
-    },[location])
+    }, [location])
 
     return (
         <header>
