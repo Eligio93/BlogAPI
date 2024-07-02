@@ -37,6 +37,7 @@ exports.login_post = [
 
                 /*if the login comes from client*/
                 if (user) {
+                    console.log(req.headers.origin)
                     if (req.headers.origin === process.env.CLIENT_URL) {
                         jwt.sign({ id: user._id }, process.env.JWT_SECRET, (err, token) => {
                             if (err) {
