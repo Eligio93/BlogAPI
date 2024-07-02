@@ -30,23 +30,36 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 50px;
-    padding: 30px 50px;
     background-color: #211949;
     color: white;
+    padding: 10px 50px;;
 }
 
 header nav,
 .auth-area {
     display: flex;
     gap: 20px;
-
+    height: 50px;
+}
+header nav{
+    align-items: center;
 }
 
 header a {
     text-decoration: none;
     color: black;
     color: white;
+}
+.auth-btn{
+    display:flex;
+    align-items: center;
+    gap:3px;
+
+}
+.authIcon{
+   height: 50%;
+   width: auto;
+   
 }
 
 
