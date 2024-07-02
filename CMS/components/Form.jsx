@@ -47,7 +47,7 @@ export default function Form({
                 />
             </label>
             {!disableField && <label htmlFor="img">Upload post Image:
-                <input id='img' type="file" name='img' onChange={handleFile} hidden={disableField} required />
+                <input id='img' type="file" name='img' accept='image/*' onChange={handleFile} hidden={disableField} required />
             </label>}
             <label htmlFor="post-published">Published?
                 <input type="checkbox" name="published" id="post-published" checked={data.published} onChange={handleCheckbox} />
