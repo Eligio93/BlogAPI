@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
         async function fetchUser(token) {
             try {
                 //check if the token is valid calling the get user and passing the token we have saved in local storage
-                let response = await axios.get('http://localhost:3000/user', { headers: { Authorization: `Bearer ${token}` } })
+                let response = await axios.get(`${import.meta.env.VITE_SERVER_BASEURL}/user`, { headers: { Authorization: `Bearer ${token}` } })
                 //if the response is okay return the user and doesn t touch the token
                 return response.data.user;
             } catch (err) {

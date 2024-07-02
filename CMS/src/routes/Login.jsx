@@ -19,11 +19,11 @@ export default function Login() {
             setMessage(location.state.message)
         }
     }, [])
-
+    //handle submit form 
     async function handleLogin(e) {
         e.preventDefault()
         try {
-            let result = await axios.post('http://localhost:3000/user/login', data)
+            let result = await axios.post(`${import.meta.env.VITE_SERVER_BASEURL}/user/login`, data)
             let token = result.data.token
             localStorage.setItem('token', token)
             setJwt(token)
@@ -36,10 +36,12 @@ export default function Login() {
             setError(err.response.data.message)
         }
     }
+    //Set email and password in case of a guest login
     function handleGuestLogin() {
         setData({ email: 'guest@guest.com', password: 'guestguest' })
-        // handleLogin()
     }
+
+    //handle input change
     function handleChange(e) {
         const { name, value } = e.target;
         setData((prevData) => ({
@@ -52,14 +54,14 @@ export default function Login() {
         <div className="login-area">
             <h1>Login</h1>
             {message && <p>{message}</p>}
-            {error && <p className="error-msg">{error}</p> }
+            {error && <p className="error-msg">{error}</p>}
             <form onSubmit={handleLogin} className="form">
                 <label htmlFor="cms-email">Email
                 </label>
-                <input type="text" name="email" id='cms-email' autoComplete="true" value={data.email} onChange={handleChange} />
+                <input type="text" name="email" id='cms-email' autoComplete="true" value={data.email} onChange={handleChange} required />
                 <label htmlFor="cms-password">Password
                 </label>
-                <input type="password" name='password' id='cms-password' value={data.password} onChange={handleChange}/>
+                <input type="password" name='password' id='cms-password' value={data.password} onChange={handleChange} required />
                 <button type='submit' className="yellow-btn">Login</button>
                 <button onClick={handleGuestLogin} className="yellow-btn">Guest Login</button>
             </form>

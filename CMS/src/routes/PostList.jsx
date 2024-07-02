@@ -6,16 +6,17 @@ import commentIcon from '../img/commentIcon.svg'
 import calendarIcon from '../img/calendarIcon.svg'
 import Loading from "../../components/Loading";
 import { AuthContext } from "../../components/AuthContext";
-import {format} from "date-fns"
+import { format } from "date-fns"
 
 export default function PostList() {
     const navigate = useNavigate()
     const { status } = useParams();
-    const {user}= useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [posts, setPosts] = useState();
     const [error, setError] = useState();
     const [loading, setLoading] = useState(true);
 
+    //redirect the user in case is not logged
     useEffect(() => {
         if (!user) {
             navigate('/login', { state: { message: 'You need to be logged in to see the content' } })
@@ -23,10 +24,11 @@ export default function PostList() {
 
     })
 
+    //get all posts based on the status (published,unpublished)
     useEffect(() => {
         async function getPosts() {
             try {
-                let results = await axios.get('http://localhost:3000/blog/posts');
+                let results = await axios.get(`${import.meta.env.VITE_SERVER_BASEURL}/blog/posts`);
                 if (status === 'published') {
                     setPosts(results.data.filter((post) => post.published))
                 } else if (status === 'unpublished') {
@@ -68,7 +70,7 @@ export default function PostList() {
                         <div className="listed-post-info">
                             <div className="listed-post-author">
                                 <img src={userIcon} alt="" />
-                                <p>{post.author}</p>
+                                <p>{post.author.name +' '+post.author.lastName}</p>
                             </div>
                             <div className="listed-post-comments">
                                 <img src={commentIcon} alt="" />
@@ -76,7 +78,7 @@ export default function PostList() {
                             </div>
                             <div className="listed-post-date">
                                 <img src={calendarIcon} alt="" />
-                                <p>{format((post.date),'dd MMM yyyy')}</p>
+                                <p>{format((post.date), 'dd MMM yyyy')}</p>
                             </div>
                         </div>
                     </li>

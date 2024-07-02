@@ -16,18 +16,18 @@ export default function Post() {
     const [error, setError] = useState();
     const [loading, setLoading] = useState(true);
 
-
+    //redirect user to login page in case is not logged
     useEffect(() => {
         if (!user) {
             navigate('/login', { state: { message: 'You need to be logged in to see the content' } })
         }
 
     })
-
+    //used to retrieve all the post infos
     useEffect(() => {
         async function getPost() {
             try {
-                let result = await axios.get(`http://localhost:3000/blog/posts/${postId}`)
+                let result = await axios.get(`${import.meta.env.VITE_SERVER_BASEURL}/blog/posts/${postId}`)
                 setPost(result.data)
                 setError()
             } catch (err) {
@@ -44,11 +44,12 @@ export default function Post() {
 
     }, [postId, commentDeleted])
 
+    //handle the edit of the existing post
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
         try {
-            let result = await axios.put(`http://localhost:3000/blog/posts/edit/${postId}`, post, { headers: { Authorization: `Bearer ${jwt}` } })
+            let result = await axios.put(`${import.meta.env.VITE_SERVER_BASEURL}/blog/posts/edit/${postId}`, post, { headers: { Authorization: `Bearer ${jwt}` } })
             if (result.status === 200) {
                 setSuccess(result.data.message)
                 setError()
@@ -63,11 +64,11 @@ export default function Post() {
         }
 
     }
-
+    //handle delete of existing post
     async function handleDelete(e) {
         e.preventDefault();
         try {
-            let result = await axios.delete(`http://localhost:3000/blog/posts/delete/${postId}`, { data: post, headers: { Authorization: `Bearer ${jwt}` } })
+            let result = await axios.delete(`${import.meta.env.VITE_SERVER_BASEURL}/blog/posts/delete/${postId}`, { data: post, headers: { Authorization: `Bearer ${jwt}` } })
             if (result.status === 200) {
                 setSuccess(result.data.message)
                 setError()
@@ -84,26 +85,34 @@ export default function Post() {
 
         }
     }
+
+    //handle the text input for post title and post description
     function handleTextInput(e) {
         const { name, value } = e.target;
         setPost((prevData) => ({
             ...prevData, [name]: value
         }))
     }
+
+    //handle checkboxes for published and featured
     function handleCheckbox(e) {
         const { name, checked } = e.target;
         setPost(prevData => ({ ...prevData, [name]: checked }))
 
     }
+
+    //handle the TinyMCE Editor
     const handleEditor = (newValue, editorRef) => {
         setPost((prevData) => ({
             ...prevData, body_text: editorRef.getContent({ format: 'text' })
         }))
     }
+
+    //handle function to delete a comment
     async function handleDeleteComment(comment) {
         setLoading(true);
         try {
-            let result = await axios.delete(`http://localhost:3000/blog/posts/${postId}/comments/delete/${comment._id}`, { data: comment, headers: { Authorization: `Bearer ${jwt}` } })
+            let result = await axios.delete(`${import.meta.env.VITE_SERVER_BASEURL}/blog/posts/${postId}/comments/delete/${comment._id}`, { data: comment, headers: { Authorization: `Bearer ${jwt}` } })
             console.log(result)
             if (result.status === 200) {
                 //this makes the whole component to re render
@@ -150,10 +159,10 @@ export default function Post() {
                     {post.comments.map((comment =>
                         <li key={comment._id} className="comment">
                             <div className="comment-info">
-                            <p>{comment.author.name +' says:'}</p>
-                            <p>{comment.message}</p>
+                                <p>{comment.author.name + ' says:'}</p>
+                                <p>{comment.message}</p>
                             </div>
-                         
+
                             <button className="red-btn" onClick={() => handleDeleteComment(comment)}>Delete</button>
                         </li>
                     ))}

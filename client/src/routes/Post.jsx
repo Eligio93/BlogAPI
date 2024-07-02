@@ -61,7 +61,7 @@ function Post() {
             <div className="post-info">
                 <img src={userAvatar} alt="" />
                 <div className="post-author">
-                    <p>{'Article written by ' + post.author}</p>
+                    <p>{'Article written by ' + post.author.name}</p>
                     <p>{format((post.date), 'dd MMM yyyy')}</p>
                 </div>
             </div>

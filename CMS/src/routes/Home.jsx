@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom"
 export default function Home() {
     const { user, jwt } = useContext(AuthContext)
     const navigate = useNavigate()
+    //in case the user is not logged redirect to login page
     useEffect(() => {
         if (!user) {
             navigate('/login', { state: { message: 'You need to be logged in to see the content' } })
         }
-
     }, [])
 
 
@@ -18,7 +18,7 @@ export default function Home() {
             <h3>Set of Rules</h3>
             <ul  className="rules-list">
                 <li>
-                    <p> With the sidebar on the left you can navigate through all posts in the blog </p>
+                    <p> With the sidebar/menu you can navigate through all posts in the blog </p>
                 </li>
                 
                 <li>
