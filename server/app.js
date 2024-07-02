@@ -8,6 +8,8 @@ const mongoose = require ('mongoose')
 var usersRouter = require('./routes/user');
 const blogRouter = require ('./routes/blog');
 const passport = require ('./passport-config')
+const compression = require('compression')
+const helmet = require('helmet')
 require('dotenv').config();
 
 ///-----CONNECTION TO DB-----///
@@ -25,6 +27,8 @@ async function main() {
 
 var app = express();
 app.use(cors())
+app.use(compression())
+app.use(helmet())
 
 
 // view engine setup
