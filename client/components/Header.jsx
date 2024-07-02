@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import { AuthContext } from "./AuthContext";
 import { Link } from "react-router-dom";
+import loginIcon from "../src/img/loginIcon.svg"
+import registerIcon from "../src/img/registerIcon.svg"
+import logoutIcon   from "../src/img/logoutIcon.svg"
 
 
 
@@ -13,17 +16,17 @@ function Header() {
             <div className="auth-area">
                 {user ? (
                     <div className="auth-btn">
-                        <img src="" alt="" />
+                        <img className='authIcon'src={logoutIcon} alt="" />
                         <Link onClick={logOut}>Logout</Link>
                     </div>
                 ) : (
                     <>
                         <div className="auth-btn">
-                            <img src="" alt="" />
+                            <img className='authIcon' src={loginIcon} alt="" />
                             <Link to='/login'>Login</Link>
                         </div>
                         <div className="auth-btn">
-                            <img src="" alt="" />
+                            <img className='authIcon' src={registerIcon} alt="" />
                             <Link to='/signup'>Register</Link>
                         </div>
                     </>
