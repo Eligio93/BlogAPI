@@ -7,7 +7,7 @@ const PostSchema= new Schema({
     description:{type:String, required:true},
     body_text:{type:String,required:true},
     comments:[{type:Schema.Types.ObjectId, ref:'Comment'}],
-    author:/*{type:Schema.Types.ObjectId, ref:'User'},*/ {type:String, required:true},
+    author:{type:Schema.Types.ObjectId, ref:'User'},
     published:{type:Boolean, required:true},
     featured:{type:Boolean, required:true},
     img:{type:String, required:true}
