@@ -386,6 +386,39 @@ header a {
 .success-msg {
     color: green;
 }
+/*---ABOUT STYLE -----*/
+.about{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    padding:20px;
+}
+.about p, .about a{
+    padding:10px;
+}
+.cms-link{
+    background-color: var(--orange);
+    width:fit-content;
+    padding:10px;
+    border-radius:5px;
+    font-weight: bold;
+    text-decoration: none;
+    color:var(--dark-purple)
+}
+
+.contact img{
+    height:50px;
+}
+.contact a{
+    display:flex;
+    align-items: center;
+    text-decoration: none;
+    gap:10px;
+    color:var(--dark-purple)
+}
+.contact a:hover{
+    color:var(--orange)
+}
 
 /* ----- MEDIA QUERIES -----*/
 
